@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "frozen_at": "2026-08-25",
+  "frozen_by": "user",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "concept_source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "network_config": "default",
+  "query_packs": [
+    {
+      "campaign_id": "demand_action_v1",
+      "query_pack_version": "demand_action_v1.qp.v1.0.0",
+      "path": "surveillance-video-agent/query-packs/demand_action_v1/demand_action_v1.qp.v1.0.0.draft.json",
+      "file_sha256": "5470dd63d9c8a6e7b4bacbe81942f63da6f9457691a0c6ef9605abd16f8f448d",
+      "canonical_queries_sha256": "b9ae30ec4ea9b10b67b54d8e1a879d89aff2ca7e25cec361260ed615abb7b2e7",
+      "query_count": 27
+    },
+    {
+      "campaign_id": "fight_confounder_v1",
+      "query_pack_version": "fight_confounder_v1.qp.v1.0.0",
+      "path": "surveillance-video-agent/query-packs/fight_confounder_v1/fight_confounder_v1.qp.v1.0.0.draft.json",
+      "file_sha256": "59d70730782d6ee24f56b9fefa56e0f79b719ae0b05db36adc853034eb4b9330",
+      "canonical_queries_sha256": "405dd7da30550cf04b27e3a355a5f05025d9f8deb87bfc7ce6e55aece3defa7e",
+      "query_count": 36
+    }
+  ],
+  "total_queries": 63,
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "immutability_rule": "Any query or query metadata change requires a new query_pack_version; the .draft.json filenames are retained as reviewed artifact paths, but their internal frozen status is authoritative."
+}

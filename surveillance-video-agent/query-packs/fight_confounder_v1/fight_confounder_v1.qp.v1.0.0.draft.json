@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "fight_confounder_v1.qp.v1.0.0",
+  "campaign_id": "fight_confounder_v1",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/chinese-concepts.proposal.md",
+  "source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控来源中，外观或场景容易被误判为攻击/打架，但元数据指向非攻击行为或没有发生攻击的候选。",
+    "subtypes": [
+      {
+        "subtype": "冲突但未攻击",
+        "target_definition": "存在明显冲突、敌意或紧张姿态，但没有拳打、脚踢、掌掴、冲撞、摔投、勒颈、武器攻击等实际攻击动作。",
+        "core_concepts": [
+          "争吵",
+          "口角",
+          "激烈争论",
+          "言语冲突",
+          "面对面对峙",
+          "对峙",
+          "僵持",
+          "紧张对峙",
+          "相互指责",
+          "指手画脚",
+          "愤怒交谈",
+          "激烈手势",
+          "近距离争执",
+          "阻拦但未动手",
+          "冲突升级前",
+          "差点打起来",
+          "没有动手",
+          "未发生攻击",
+          "被旁人劝开"
+        ]
+      },
+      {
+        "subtype": "舞蹈/玩闹/训练",
+        "target_definition": "动作可能类似挥拳、踢腿、拉扯或追逐，但语境明确是舞蹈、游戏、友好玩闹、训练或排练，没有真实攻击意图。",
+        "core_concepts": [
+          "跳舞",
+          "双人舞",
+          "群体舞蹈",
+          "即兴舞蹈",
+          "派对跳舞",
+          "庆祝舞蹈",
+          "玩闹",
+          "打闹",
+          "嬉闹",
+          "追逐玩耍",
+          "假装打架",
+          "模拟对打",
+          "友好切磋",
+          "拳击训练",
+          "武术训练",
+          "格斗训练",
+          "摔跤训练",
+          "对练",
+          "陪练",
+          "影子拳",
+          "动作排练"
+        ]
+      },
+      {
+        "subtype": "非攻击性身体接触",
+        "target_definition": "存在人与人的身体接触，但接触是友好、照护、协助、偶然或日常行为，不包含攻击意图。",
+        "core_concepts": [
+          "拥抱",
+          "握手",
+          "击掌",
+          "拍肩",
+          "拉手",
+          "搀扶",
+          "扶起",
+          "帮助站立",
+          "引导行走",
+          "照护",
+          "安慰",
+          "友好拉扯",
+          "正常搬抬",
+          "递交物品时接触",
+          "意外碰撞",
+          "擦肩碰撞",
+          "拥挤接触",
+          "人群中身体接触"
+        ]
+      },
+      {
+        "subtype": "场景先验",
+        "target_definition": "场景本身常与冲突事件共同出现，容易形成“打架场景”先验，但候选元数据不指向攻击行为。场景词必须与普通行为或无攻击概念组合，不能只搜索真实打架事件。",
+        "scene_concepts": [
+          "酒吧门口",
+          "夜店入口",
+          "商店收银台",
+          "便利店内",
+          "超市入口",
+          "停车场",
+          "地下车库",
+          "加油站",
+          "小区门口",
+          "公寓入口",
+          "楼道",
+          "电梯",
+          "楼梯间",
+          "校园走廊",
+          "车站站台",
+          "公交站",
+          "仓库",
+          "工厂车间",
+          "办公区",
+          "饭店入口"
+        ],
+        "ordinary_behavior_concepts": [
+          "等待",
+          "排队",
+          "交谈",
+          "站立",
+          "坐着",
+          "经过",
+          "进出",
+          "徘徊",
+          "聚集",
+          "分散",
+          "日常活动",
+          "无冲突",
+          "没有打架",
+          "没有攻击"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-25T09:38:01Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-25",
+  "frozen_by": "user",
+  "content_sha256": "405dd7da30550cf04b27e3a355a5f05025d9f8deb87bfc7ce6e55aece3defa7e",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "queries": [
+    {
+      "query_id": "fcv1-conflict-no-attack-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "en",
+      "query": "CCTV heated argument",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "heated argument",
+      "rationale_zh": "检索 CCTV 中有明显争执但尚未指向攻击的场景。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "en",
+      "query": "surveillance camera face-off no fight",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "face-off no fight",
+      "rationale_zh": "覆盖固定监控中面对面对峙但没有打架。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "en",
+      "query": "security camera verbal confrontation",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "verbal confrontation",
+      "rationale_zh": "覆盖安防摄像头中的言语冲突。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "es",
+      "query": "cámara de vigilancia discusión acalorada",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "discusión acalorada",
+      "rationale_zh": "检索西语监控元数据中的激烈争吵。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "es",
+      "query": "cámara de seguridad enfrentamiento sin pelea",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "enfrentamiento sin pelea",
+      "rationale_zh": "覆盖安防摄像头中的对峙但没有打架。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "es",
+      "query": "circuito cerrado de televisión conflicto verbal",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "conflicto verbal",
+      "rationale_zh": "用闭路电视强锚点检索言语冲突。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "fr",
+      "query": "caméra de surveillance dispute animée",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "dispute animée",
+      "rationale_zh": "检索法语监控元数据中的激烈争吵。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "fr",
+      "query": "caméra de sécurité face-à-face sans bagarre",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "face-à-face sans bagarre",
+      "rationale_zh": "覆盖安防摄像头中的面对面对峙但没有打架。"
+    },
+    {
+      "query_id": "fcv1-conflict-no-attack-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "fr",
+      "query": "vidéosurveillance confrontation verbale",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "confrontation verbale",
+      "rationale_zh": "用法语视频监控强锚点检索言语冲突。"
+    },
+    {
+      "query_id": "fcv1-play-training-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "en",
+      "query": "CCTV people dancing",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "people dancing",
+      "rationale_zh": "检索 CCTV 自然记录的舞蹈行为。"
+    },
+    {
+      "query_id": "fcv1-play-training-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "en",
+      "query": "surveillance camera friends play fighting",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "friends play fighting",
+      "rationale_zh": "覆盖固定监控中朋友间的假装打架或玩闹。"
+    },
+    {
+      "query_id": "fcv1-play-training-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "en",
+      "query": "security camera martial arts training",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "martial arts training",
+      "rationale_zh": "检索安防摄像头自然记录的武术训练，后续硬排除教学视频。"
+    },
+    {
+      "query_id": "fcv1-play-training-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "es",
+      "query": "cámara de vigilancia personas bailando",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "personas bailando",
+      "rationale_zh": "检索西语监控元数据中的自然舞蹈行为。"
+    },
+    {
+      "query_id": "fcv1-play-training-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "es",
+      "query": "cámara de seguridad amigos jugando a pelear",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "amigos jugando a pelear",
+      "rationale_zh": "覆盖安防摄像头中朋友间的玩闹对打。"
+    },
+    {
+      "query_id": "fcv1-play-training-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "es",
+      "query": "circuito cerrado de televisión entrenamiento de artes marciales",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "entrenamiento de artes marciales",
+      "rationale_zh": "用闭路电视强锚点检索自然发生的武术训练，教学内容仍硬排除。"
+    },
+    {
+      "query_id": "fcv1-play-training-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "fr",
+      "query": "caméra de surveillance personnes dansant",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "personnes dansant",
+      "rationale_zh": "检索法语监控元数据中的自然舞蹈行为。"
+    },
+    {
+      "query_id": "fcv1-play-training-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "fr",
+      "query": "caméra de sécurité jeu de bagarre entre amis",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "jeu de bagarre entre amis",
+      "rationale_zh": "覆盖安防摄像头中朋友间的玩闹对打。"
+    },
+    {
+      "query_id": "fcv1-play-training-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "fr",
+      "query": "vidéosurveillance entraînement aux arts martiaux",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "entraînement aux arts martiaux",
+      "rationale_zh": "用法语视频监控强锚点检索自然发生的武术训练，教学内容仍硬排除。"
+    },
+    {
+      "query_id": "fcv1-contact-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "en",
+      "query": "CCTV people hugging",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "people hugging",
+      "rationale_zh": "检索 CCTV 中容易被动作模型误判的拥抱。"
+    },
+    {
+      "query_id": "fcv1-contact-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "en",
+      "query": "surveillance camera helping person stand up",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "helping person stand up",
+      "rationale_zh": "覆盖固定监控中的搀扶和帮助站立。"
+    },
+    {
+      "query_id": "fcv1-contact-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "en",
+      "query": "security camera accidental collision between people",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "accidental collision between people",
+      "rationale_zh": "明确检索安防摄像头中的人与人意外身体碰撞，避免车辆事故。"
+    },
+    {
+      "query_id": "fcv1-contact-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "es",
+      "query": "cámara de vigilancia personas abrazándose",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "personas abrazándose",
+      "rationale_zh": "检索西语监控元数据中的拥抱行为。"
+    },
+    {
+      "query_id": "fcv1-contact-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "es",
+      "query": "cámara de seguridad ayudando a levantarse",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "ayudando a levantarse",
+      "rationale_zh": "覆盖安防摄像头中的搀扶和帮助站立。"
+    },
+    {
+      "query_id": "fcv1-contact-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "es",
+      "query": "circuito cerrado de televisión choque accidental entre personas",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "choque accidental entre personas",
+      "rationale_zh": "用闭路电视强锚点检索人与人意外身体碰撞，避免车辆事故。"
+    },
+    {
+      "query_id": "fcv1-contact-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "fr",
+      "query": "caméra de surveillance personnes qui se prennent dans les bras",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "personnes qui se prennent dans les bras",
+      "rationale_zh": "检索法语监控元数据中的拥抱行为。"
+    },
+    {
+      "query_id": "fcv1-contact-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "fr",
+      "query": "caméra de sécurité aide à se relever",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "aide à se relever",
+      "rationale_zh": "覆盖安防摄像头中的搀扶和帮助站立。"
+    },
+    {
+      "query_id": "fcv1-contact-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "fr",
+      "query": "vidéosurveillance collision accidentelle entre personnes",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "collision accidentelle entre personnes",
+      "rationale_zh": "用法语视频监控强锚点检索人与人意外身体碰撞，避免车辆事故。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "en",
+      "query": "CCTV convenience store customers waiting",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "convenience store customers waiting",
+      "rationale_zh": "组合便利店场景与普通等待行为，避免只检索真实冲突。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "en",
+      "query": "surveillance camera parking lot people talking",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "parking lot people talking",
+      "rationale_zh": "组合停车场先验与普通交谈行为。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "en",
+      "query": "security camera apartment entrance no fight",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "apartment entrance no fight",
+      "rationale_zh": "组合公寓入口场景和明确无打架语义。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "es",
+      "query": "cámara de vigilancia clientes esperando en tienda de conveniencia",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "clientes esperando en tienda de conveniencia",
+      "rationale_zh": "组合便利店场景与普通等待行为，避免真实冲突语义。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "es",
+      "query": "cámara de seguridad personas hablando en estacionamiento",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "personas hablando en estacionamiento",
+      "rationale_zh": "组合停车场先验与普通交谈行为。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "es",
+      "query": "circuito cerrado de televisión entrada de apartamento sin pelea",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "entrada de apartamento sin pelea",
+      "rationale_zh": "组合公寓入口场景和明确无打架语义。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "fr",
+      "query": "caméra de surveillance clients attendant dans une supérette",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "clients attendant dans une supérette",
+      "rationale_zh": "组合便利店场景与普通等待行为，避免真实冲突语义。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "fr",
+      "query": "caméra de sécurité personnes discutant dans un parking",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "personnes discutant dans un parking",
+      "rationale_zh": "组合停车场先验与普通交谈行为。"
+    },
+    {
+      "query_id": "fcv1-scene-prior-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "fr",
+      "query": "vidéosurveillance entrée d'immeuble sans bagarre",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "entrée d'immeuble sans bagarre",
+      "rationale_zh": "组合公寓入口场景和明确无打架语义。"
+    }
+  ]
+}

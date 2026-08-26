@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "source_draft": "surveillance_zh_concepts_draft_01",
+  "source_path": "surveillance-video-agent/query-packs/chinese-concepts.proposal.md",
+  "source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "source_language": "zh",
+  "campaigns": [
+    "demand_action_v1",
+    "fight_confounder_v1"
+  ],
+  "frozen_at": "2026-08-25",
+  "frozen_by": "user",
+  "query_derivations_created": false,
+  "immutability_rule": "Any Chinese semantic change requires a new concept_pack_version; do not overwrite the frozen source."
+}
