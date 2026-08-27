@@ -5,12 +5,15 @@ import unittest
 from unittest.mock import patch
 
 from surveillance_video_agent.adapters.base import (
+    CommandResult,
     SubprocessCommandRunner,
+    classify_command_error,
     ensure_child_path,
     ensure_managed_output_dir,
     sanitize_error_text,
     sanitize_metadata,
 )
+from surveillance_video_agent.contracts import AdapterErrorKind
 
 
 class AdapterBaseTests(unittest.TestCase):
@@ -42,6 +45,17 @@ class AdapterBaseTests(unittest.TestCase):
         )
         self.assertNotIn("Bearer-secret", cleaned)
         self.assertNotIn("googlevideo.com", cleaned)
+
+    def test_http_403_and_503_are_transient_network_failures(self) -> None:
+        for message in (
+            "HTTP Error 403: Forbidden",
+            "HTTP Error 503: Service Unavailable",
+            "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol",
+        ):
+            self.assertEqual(
+                classify_command_error(CommandResult(1, "", message)),
+                AdapterErrorKind.NETWORK,
+            )
 
     def test_output_directory_must_remain_under_managed_root(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

@@ -1,18 +1,22 @@
-"""Dailymotion adapter backed by yt-dlp's maintained extractors.
+"""Dailymotion adapter using the public search API and yt-dlp media extractor.
 
 The adapter deliberately accepts only canonical Dailymotion video identities.
-Search may discover a video through Dailymotion's search extractor, but probe and
-download never follow arbitrary embed, playlist, or third-party URLs.
+Search uses Dailymotion's public Platform API because the yt-dlp GraphQL search
+extractor can return empty lists even when matching public videos exist. Probe
+and download never follow arbitrary embed, playlist, or third-party URLs.
 """
 
 from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Mapping
-from urllib.parse import quote_plus, urlsplit
+from typing import Any, Mapping, Protocol
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode, urlsplit
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from surveillance_video_agent.contracts import (
     AdapterError,
@@ -28,6 +32,7 @@ from surveillance_video_agent.contracts import (
 
 from .base import (
     CommandResult,
+    CommandRunner,
     PlatformAdapter,
     classify_command_error,
     ensure_child_path,
@@ -42,6 +47,87 @@ _VIDEO_PATH_RE = re.compile(r"^/video/(?P<id>[A-Za-z0-9]{1,128})(?:_[^/]*)?/?$")
 _SHORT_PATH_RE = re.compile(r"^/(?P<id>[A-Za-z0-9]{1,128})/?$")
 _ALLOWED_HOSTS = frozenset({"dailymotion.com", "www.dailymotion.com", "dai.ly"})
 _SEARCH_TIMEOUT_SECONDS = 60.0
+_SEARCH_ENDPOINT = "https://api.dailymotion.com/videos"
+_SEARCH_FIELDS = "id,title,duration,owner,owner.screenname,url"
+_MAX_SEARCH_RESPONSE_BYTES = 4 * 1024 * 1024
+
+
+@dataclass(frozen=True, slots=True)
+class DailymotionSearchResponse:
+    status_code: int
+    payload: Any
+    final_url: str
+
+
+class DailymotionSearchClient(Protocol):
+    def search(
+        self,
+        query: str,
+        *,
+        limit: int,
+        timeout_seconds: float,
+    ) -> DailymotionSearchResponse: ...
+
+
+class DailymotionSearchFailure(RuntimeError):
+    def __init__(self, message: str, *, status_code: int | None = None) -> None:
+        super().__init__(message)
+        self.status_code = status_code
+
+
+class _DailymotionRedirectHandler(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[override]
+        _validate_search_api_url(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+class UrllibDailymotionSearchClient:
+    """Small injectable client that inherits the process network environment."""
+
+    def search(
+        self,
+        query: str,
+        *,
+        limit: int,
+        timeout_seconds: float,
+    ) -> DailymotionSearchResponse:
+        parameters = urlencode(
+            {
+                "search": query,
+                "fields": _SEARCH_FIELDS,
+                "limit": limit,
+                "sort": "relevance",
+            }
+        )
+        request = Request(
+            f"{_SEARCH_ENDPOINT}?{parameters}",
+            headers={
+                "Accept": "application/json",
+                "User-Agent": "surveillance-video-agent/2 dailymotion-adapter",
+            },
+            method="GET",
+        )
+        opener = build_opener(_DailymotionRedirectHandler())
+        try:
+            with opener.open(request, timeout=timeout_seconds) as response:
+                final_url = response.geturl()
+                _validate_search_api_url(final_url)
+                body = response.read(_MAX_SEARCH_RESPONSE_BYTES + 1)
+                if len(body) > _MAX_SEARCH_RESPONSE_BYTES:
+                    raise DailymotionSearchFailure("Dailymotion search response exceeds 4 MiB")
+                status_code = int(response.status)
+        except HTTPError as error:
+            raise DailymotionSearchFailure(
+                f"Dailymotion search returned HTTP {error.code}",
+                status_code=int(error.code),
+            ) from error
+        except (URLError, TimeoutError, OSError) as error:
+            raise DailymotionSearchFailure("Dailymotion search request failed") from error
+        try:
+            payload = json.loads(body.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise DailymotionSearchFailure("Dailymotion search returned invalid JSON") from error
+        return DailymotionSearchResponse(status_code, payload, final_url)
 
 
 class DailymotionAdapter(PlatformAdapter):
@@ -49,31 +135,40 @@ class DailymotionAdapter(PlatformAdapter):
 
     platform = "dailymotion"
 
+    def __init__(
+        self,
+        runner: CommandRunner | None = None,
+        *,
+        executable: str = "yt-dlp",
+        search_client: DailymotionSearchClient | None = None,
+    ) -> None:
+        super().__init__(runner=runner, executable=executable)
+        self._search_client = search_client or UrllibDailymotionSearchClient()
+
     def search(self, request: SearchRequest) -> list[SearchHit]:
         self.validate_request_platform(request.platform)
-        search_url = (
-            "https://www.dailymotion.com/search/"
-            f"{quote_plus(request.query, safe='')}/videos"
-        )
-        result = self.run_command(
-            [
-                *self._safe_yt_dlp_prefix(),
-                "--flat-playlist",
-                "--playlist-end",
-                str(request.limit),
-                "--dump-single-json",
-                "--",
-                search_url,
-            ],
-            timeout_seconds=_SEARCH_TIMEOUT_SECONDS,
-        )
-        payload = self._json_payload(result, operation="Dailymotion search")
-        entries = payload.get("entries")
+        try:
+            response = self._search_client.search(
+                request.query,
+                limit=request.limit,
+                timeout_seconds=_SEARCH_TIMEOUT_SECONDS,
+            )
+        except DailymotionSearchFailure as error:
+            raise AdapterError(
+                _search_error_kind(error.status_code),
+                sanitize_error_text(str(error)),
+            ) from error
+        _validate_search_api_url(response.final_url)
+        if response.status_code != 200 or not isinstance(response.payload, Mapping):
+            raise AdapterError(
+                _search_error_kind(response.status_code),
+                f"Dailymotion search returned HTTP {response.status_code}",
+            )
+        entries = response.payload.get("list")
         if not isinstance(entries, list):
             raise AdapterError(
                 AdapterErrorKind.TOOL_ERROR,
                 "Dailymotion search did not return an entries list",
-                returncode=result.returncode,
             )
 
         hits: list[SearchHit] = []
@@ -101,17 +196,16 @@ class DailymotionAdapter(PlatformAdapter):
                     lang=request.lang,
                     query_pack_version=request.query_pack_version,
                     title=_optional_text(entry.get("title")),
-                    uploader=_optional_text(entry.get("uploader")),
+                    uploader=_optional_text(entry.get("owner.screenname")),
                     duration_seconds=_optional_number(entry.get("duration")),
                     raw_summary=sanitize_metadata(
                         {
-                            "extractor": entry.get("extractor"),
-                            "extractor_key": entry.get("extractor_key"),
                             "id": source_id,
                             "title": entry.get("title"),
-                            "uploader": entry.get("uploader"),
+                            "uploader_id": entry.get("owner"),
+                            "uploader": entry.get("owner.screenname"),
                             "duration": entry.get("duration"),
-                            "availability": entry.get("availability"),
+                            "url": entry.get("url"),
                         }
                     ),
                 )
@@ -308,6 +402,25 @@ class DailymotionAdapter(PlatformAdapter):
             self.executable,
             "--ignore-config",
             "--no-plugin-dirs",
+            "--force-ipv4",
+            "--socket-timeout",
+            "30",
+            "--sleep-requests",
+            "1.0",
+            "--extractor-retries",
+            "5",
+            "--retries",
+            "5",
+            "--fragment-retries",
+            "5",
+            "--retry-sleep",
+            "http:exp=2:20",
+            "--retry-sleep",
+            "extractor:exp=2:20",
+            "--retry-sleep",
+            "fragment:exp=1:10",
+            "--concurrent-fragments",
+            "1",
             "--no-write-subs",
             "--no-write-auto-subs",
         ]
@@ -362,6 +475,36 @@ def _validate_identity(source_url: str, source_id: str, candidate_key: str) -> s
     if match is None or match.group("id") != source_id:
         raise ValueError("Dailymotion source_url does not match source_id")
     return _canonical_url(source_id)
+
+
+def _validate_search_api_url(url: str) -> None:
+    parsed = urlsplit(url)
+    if parsed.scheme.lower() != "https" or parsed.hostname is None:
+        raise ValueError("Dailymotion search API must use HTTPS")
+    if parsed.username is not None or parsed.password is not None:
+        raise ValueError("Dailymotion search API URL must not contain credentials")
+    try:
+        port = parsed.port
+    except ValueError as error:
+        raise ValueError("Dailymotion search API URL has an invalid port") from error
+    if port not in (None, 443):
+        raise ValueError("Dailymotion search API URL must use the HTTPS port")
+    if parsed.hostname.rstrip(".").lower() != "api.dailymotion.com":
+        raise ValueError("Dailymotion search redirected outside api.dailymotion.com")
+    if parsed.path.rstrip("/") != "/videos":
+        raise ValueError("Dailymotion search API path changed unexpectedly")
+
+
+def _search_error_kind(status_code: int | None) -> AdapterErrorKind:
+    if status_code == 429:
+        return AdapterErrorKind.RATE_LIMITED
+    if status_code in {401, 403}:
+        return AdapterErrorKind.PRIVATE
+    if status_code in {404, 410}:
+        return AdapterErrorKind.NOT_FOUND
+    if status_code is None or status_code >= 500:
+        return AdapterErrorKind.NETWORK
+    return AdapterErrorKind.TOOL_ERROR
 
 
 def _canonical_url(source_id: str) -> str:

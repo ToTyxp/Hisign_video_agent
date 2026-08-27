@@ -168,6 +168,11 @@ class YouTubeAdapterIntegrationTests(unittest.TestCase):
             self.assertIn("--max-filesize", args)
             self.assertIn("bestvideo[height<=1080]+bestaudio/best[height<=1080]", args)
             self.assertIn("--no-playlist", args)
+            self.assertIn("--force-ipv4", args)
+            self.assertEqual(args[args.index("--sleep-requests") + 1], "1.0")
+            self.assertEqual(args[args.index("--js-runtimes") + 1], "node")
+            self.assertIn("extractor:exp=2:20", args)
+            self.assertEqual(args[args.index("--concurrent-fragments") + 1], "1")
             self.assertNotIn("android", " ".join(args).lower())
 
     def test_download_classifies_timeout_without_creating_success(self) -> None:

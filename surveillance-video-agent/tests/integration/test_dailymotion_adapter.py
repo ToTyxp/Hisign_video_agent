@@ -7,7 +7,10 @@ from pathlib import Path
 from typing import Callable, Mapping, Sequence
 
 from surveillance_video_agent.adapters.base import CommandResult
-from surveillance_video_agent.adapters.dailymotion import DailymotionAdapter
+from surveillance_video_agent.adapters.dailymotion import (
+    DailymotionAdapter,
+    DailymotionSearchResponse,
+)
 from surveillance_video_agent.contracts import (
     AdapterError,
     AdapterErrorKind,
@@ -43,6 +46,16 @@ class FakeRunner:
         return self.results.pop(0)
 
 
+class FakeSearchClient:
+    def __init__(self, response: DailymotionSearchResponse) -> None:
+        self.response = response
+        self.calls: list[tuple[str, int, float]] = []
+
+    def search(self, query: str, *, limit: int, timeout_seconds: float):
+        self.calls.append((query, limit, timeout_seconds))
+        return self.response
+
+
 def search_request(query: str = "security camera person kneeling") -> SearchRequest:
     return SearchRequest(
         platform="dailymotion",
@@ -70,16 +83,16 @@ def probe_request(source_url: str = "https://www.dailymotion.com/video/x8abc12")
 
 
 class DailymotionAdapterTests(unittest.TestCase):
-    def test_search_uses_native_search_extractor_and_caps_results(self) -> None:
+    def test_search_uses_public_api_and_caps_results(self) -> None:
         payload = {
-            "entries": [
+            "list": [
                 {
                     "id": "x8abc12",
                     "title": "Security camera footage",
-                    "uploader": "Camera Archive",
+                    "owner": "xowner",
+                    "owner.screenname": "Camera Archive",
                     "duration": 42,
                     "url": "http://untrusted.invalid/media.m3u8?token=secret",
-                    "extractor_key": "Dailymotion",
                 },
                 {"id": "x8abc12", "title": "duplicate identity"},
                 {"id": "x9def34", "title": "Doorbell camera", "duration": 13.5},
@@ -87,8 +100,15 @@ class DailymotionAdapterTests(unittest.TestCase):
                 {"id": "x" * 129, "title": "overlong identity"},
             ]
         }
-        runner = FakeRunner([CommandResult(0, stdout=json.dumps(payload))])
-        adapter = DailymotionAdapter(runner=runner)
+        runner = FakeRunner([])
+        search_client = FakeSearchClient(
+            DailymotionSearchResponse(
+                200,
+                payload,
+                "https://api.dailymotion.com/videos?search=camera",
+            )
+        )
+        adapter = DailymotionAdapter(runner=runner, search_client=search_client)
 
         hits = adapter.search(search_request("camera $(touch /tmp/never-run)"))
 
@@ -98,20 +118,11 @@ class DailymotionAdapterTests(unittest.TestCase):
             hits[0].source_url, "https://www.dailymotion.com/video/x8abc12"
         )
         self.assertEqual(hits[0].position, 1)
-        args, timeout, cwd, env = runner.calls[0]
-        self.assertEqual(args[0], "yt-dlp")
-        self.assertIn("--ignore-config", args)
-        self.assertIn("--no-plugin-dirs", args)
-        self.assertIn("--flat-playlist", args)
-        self.assertEqual(args[args.index("--playlist-end") + 1], "20")
         self.assertEqual(
-            args[-1],
-            "https://www.dailymotion.com/search/"
-            "camera+%24%28touch+%2Ftmp%2Fnever-run%29/videos",
+            search_client.calls,
+            [("camera $(touch /tmp/never-run)", 20, 60.0)],
         )
-        self.assertEqual(timeout, 60.0)
-        self.assertIsNone(cwd)
-        self.assertEqual(env, {"YTDLP_NO_PLUGINS": "1"})
+        self.assertEqual(runner.calls, [])
 
     def test_probe_preserves_full_description_and_redacts_transport_data(self) -> None:
         description = "Original platform description. " * 500
@@ -243,6 +254,11 @@ class DailymotionAdapterTests(unittest.TestCase):
             )
             self.assertIn("--no-write-thumbnail", args)
             self.assertIn("--no-write-info-json", args)
+            self.assertIn("--force-ipv4", args)
+            self.assertEqual(args[args.index("--sleep-requests") + 1], "1.0")
+            self.assertIn("http:exp=2:20", args)
+            self.assertIn("extractor:exp=2:20", args)
+            self.assertEqual(args[args.index("--concurrent-fragments") + 1], "1")
             self.assertEqual(
                 args[-2:], ["--", "https://www.dailymotion.com/video/x8abc12"]
             )

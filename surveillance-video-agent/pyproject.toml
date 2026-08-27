@@ -7,10 +7,25 @@ name = "surveillance-video-agent"
 version = "0.1.0"
 description = "Auditable multi-platform surveillance-video candidate adapters"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "dashscope==1.27.1",
+    "python-dotenv==1.2.3",
+    "qdrant-client==1.19.0",
+    "yt-dlp[curl-cffi,default]>=2026.8.19",
+]
+
+[project.scripts]
+surveillance-video-smoke = "surveillance_video_agent.smoke:main"
+surveillance-discovery-smoke = "surveillance_video_agent.discovery_smoke:main"
+surveillance-embedding-smoke = "surveillance_video_agent.embedding_smoke:main"
+surveillance-semantic-query-smoke = "surveillance_video_agent.semantic_query_smoke:main"
+surveillance-v2 = "surveillance_video_agent.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+surveillance_video_agent = ["migrations/*.sql"]

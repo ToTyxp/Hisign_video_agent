@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+import sys
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
@@ -101,7 +102,7 @@ class BasePlatformAdapter(ABC):
         executable: str = "yt-dlp",
     ) -> None:
         self.runner = runner or SubprocessCommandRunner()
-        self.executable = executable
+        self.executable = _resolve_project_yt_dlp(executable)
 
     @abstractmethod
     def search(self, request: SearchRequest) -> list[SearchHit]:
@@ -138,6 +139,19 @@ class BasePlatformAdapter(ABC):
 
 # Public compatibility alias: both names denote the same stable abstract API.
 PlatformAdapter = BasePlatformAdapter
+
+
+def _resolve_project_yt_dlp(executable: str) -> str:
+    """Prefer the yt-dlp entry point installed beside the active Python."""
+
+    if executable != "yt-dlp":
+        return executable
+    # Do not resolve the virtualenv's Python symlink: the sibling entry point
+    # lives in the virtualenv bin directory, not beside the base interpreter.
+    project_entrypoint = Path(sys.executable).absolute().with_name("yt-dlp")
+    if project_entrypoint.is_file() and os.access(project_entrypoint, os.X_OK):
+        return str(project_entrypoint)
+    return executable
 
 
 _SECRET_KEYS = frozenset(
@@ -204,7 +218,16 @@ def classify_command_error(result: CommandResult) -> AdapterErrorKind:
     if any(
         marker in text
         for marker in (
+            "http error 403",
+            "http error 500",
+            "http error 502",
+            "http error 503",
+            "http error 504",
             "connection reset",
+            "connection aborted",
+            "remote end closed connection",
+            "unexpected_eof_while_reading",
+            "eof occurred in violation of protocol",
             "network is unreachable",
             "name or service not known",
             "temporary failure in name resolution",
