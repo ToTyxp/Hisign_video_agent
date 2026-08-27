@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "source_language": "zh",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "campaigns": [
+    "sign_action_v1"
+  ],
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user",
+  "immutability_rule": "Any small-scale sign semantic change requires a new concept version."
+}

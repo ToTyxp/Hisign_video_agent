@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "demand_action_v1.qp.v1.1.0",
+  "campaign_id": "demand_action_v1",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/chinese-concepts.proposal.md",
+  "source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控来源中，人物通过举牌或横幅、下跪、静坐等持续性身体行动表达诉求、抗议、请愿或要求。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "core_concepts": [
+          "举牌",
+          "手持标语牌",
+          "手持抗议牌",
+          "展示标语牌",
+          "高举牌子",
+          "竖起标语牌",
+          "拉横幅",
+          "展开横幅",
+          "手持横幅",
+          "展示横幅",
+          "标语抗议",
+          "横幅抗议",
+          "举牌抗议",
+          "举牌请愿",
+          "举牌示威",
+          "站立抗议",
+          "小规模抗议",
+          "小规模示威",
+          "门口抗议",
+          "街边抗议",
+          "纠察举牌",
+          "罢工举牌"
+        ]
+      },
+      {
+        "subtype": "下跪",
+        "target_definition": "人物有意维持跪姿，并与抗议、请愿、请求或明确诉求相关。",
+        "core_concepts": [
+          "下跪",
+          "跪地",
+          "双膝跪地",
+          "单膝跪地",
+          "集体下跪",
+          "当众下跪",
+          "跪地抗议",
+          "下跪抗议",
+          "跪地请愿",
+          "下跪请愿",
+          "跪地请求",
+          "下跪请求",
+          "跪求",
+          "跪地表达诉求",
+          "跪在门口",
+          "跪在大厅",
+          "跪在街边"
+        ]
+      },
+      {
+        "subtype": "静坐",
+        "target_definition": "人物有意坐在地面或占据某处，并与抗议、请愿、阻挡或表达诉求相关。",
+        "core_concepts": [
+          "静坐",
+          "静坐抗议",
+          "静坐请愿",
+          "坐地抗议",
+          "坐地请愿",
+          "集体静坐",
+          "集体坐地",
+          "门口静坐",
+          "大厅静坐",
+          "街边静坐",
+          "占据入口",
+          "占据大厅",
+          "坐地阻挡入口",
+          "坐地阻塞通道",
+          "和平静坐",
+          "持续坐地表达诉求"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-26T08:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-26",
+  "frozen_by": "user",
+  "content_sha256": "29ad1beb6099a14ebe5d7aff745177e542066d87fcc77dffd71d891a732f4a9e",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "queries": [
+    {
+      "query_id": "dav11-sign-banner-en-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "CCTV protest sign raw footage",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "protest sign",
+      "rationale_zh": "以 CCTV 强来源锚点检索监控画面中的举牌抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-en-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "surveillance camera banner protest raw footage",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "banner protest",
+      "rationale_zh": "覆盖固定监控记录的横幅抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-en-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "doorbell camera picket sign raw footage",
+      "source_anchor": "doorbell camera",
+      "action_or_scene_term": "picket sign",
+      "rationale_zh": "补充门铃摄像头记录的门口纠察举牌。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-es-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "cámara de vigilancia cartel de protesta grabación original",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "cartel de protesta",
+      "rationale_zh": "覆盖西语元数据中的监控摄像头和抗议牌。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-es-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "cámara de seguridad pancarta de protesta grabación original",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "pancarta de protesta",
+      "rationale_zh": "检索安防摄像头记录的横幅抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-es-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "cámara de timbre piquete con cartel grabación original",
+      "source_anchor": "cámara de timbre",
+      "action_or_scene_term": "piquete con cartel",
+      "rationale_zh": "补充西语门铃摄像头中的纠察举牌场景。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-fr-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "caméra de surveillance pancarte de protestation images brutes",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "pancarte de protestation",
+      "rationale_zh": "覆盖法语元数据中的监控摄像头和抗议牌。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-fr-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "caméra de sécurité banderole de manifestation images brutes",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "banderole de manifestation",
+      "rationale_zh": "检索安防摄像头记录的示威横幅。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sign-banner-fr-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "caméra de sonnette piquet de grève avec pancarte images brutes",
+      "source_anchor": "caméra de sonnette",
+      "action_or_scene_term": "piquet de grève avec pancarte",
+      "rationale_zh": "补充法语门铃摄像头中的门口纠察举牌。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-en-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "en",
+      "query": "CCTV kneeling protest raw footage",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "kneeling protest",
+      "rationale_zh": "检索 CCTV 记录的下跪抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-en-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "en",
+      "query": "surveillance camera kneeling petition raw footage",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "kneeling petition",
+      "rationale_zh": "覆盖固定监控中的下跪请愿。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-en-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "en",
+      "query": "Ring doorbell camera kneeling in protest at door raw footage",
+      "source_anchor": "Ring doorbell camera",
+      "action_or_scene_term": "kneeling in protest at door",
+      "rationale_zh": "补充 Ring 门铃录像中带抗议语境的门口跪地行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-es-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "es",
+      "query": "cámara de vigilancia protesta de rodillas grabación original",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "protesta de rodillas",
+      "rationale_zh": "检索西语监控元数据中的跪地抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-es-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "es",
+      "query": "cámara de seguridad persona de rodillas pidiendo ayuda grabación original",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "persona de rodillas pidiendo ayuda",
+      "rationale_zh": "以自然西语表达覆盖安防摄像头记录的跪地请求。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-es-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "es",
+      "query": "cámara de timbre Ring persona de rodillas en protesta frente a la puerta grabación original",
+      "source_anchor": "cámara de timbre Ring",
+      "action_or_scene_term": "persona de rodillas en protesta frente a la puerta",
+      "rationale_zh": "补充 Ring 门铃摄像头记录的门口跪地抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-fr-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "fr",
+      "query": "caméra de surveillance manifestation à genoux images brutes",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "manifestation à genoux",
+      "rationale_zh": "检索法语监控元数据中的下跪抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-fr-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "fr",
+      "query": "caméra de sécurité personne à genoux qui demande de l'aide images brutes",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "personne à genoux qui demande de l'aide",
+      "rationale_zh": "以自然法语表达覆盖安防摄像头记录的跪地请求。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-kneeling-fr-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "fr",
+      "query": "caméra de sonnette Ring personne à genoux en signe de protestation devant la porte images brutes",
+      "source_anchor": "caméra de sonnette Ring",
+      "action_or_scene_term": "personne à genoux en signe de protestation devant la porte",
+      "rationale_zh": "补充 Ring 门铃录像中带抗议语境的门口跪地行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-en-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "en",
+      "query": "CCTV sit-in protest raw footage",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "sit-in protest",
+      "rationale_zh": "检索 CCTV 记录的静坐抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-en-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "en",
+      "query": "surveillance camera seated protest raw footage",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "seated protest",
+      "rationale_zh": "覆盖固定监控中的坐地抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-en-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "en",
+      "query": "security camera sit-in blocking entrance raw footage",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "sit-in blocking entrance",
+      "rationale_zh": "覆盖安防录像中的静坐阻挡入口。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-es-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "es",
+      "query": "cámara de vigilancia sentada de protesta grabación original",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "sentada de protesta",
+      "rationale_zh": "检索西语监控元数据中的静坐抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-es-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "es",
+      "query": "cámara de seguridad protesta sentados grabación original",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "protesta sentados",
+      "rationale_zh": "覆盖安防摄像头中的集体坐地抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-es-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "es",
+      "query": "circuito cerrado de televisión sentada bloqueando la entrada grabación original",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "sentada bloqueando la entrada",
+      "rationale_zh": "用闭路电视强锚点检索静坐阻挡入口。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-fr-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "fr",
+      "query": "caméra de surveillance sit-in de protestation images brutes",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "sit-in de protestation",
+      "rationale_zh": "检索法语监控元数据中的静坐抗议。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-fr-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "fr",
+      "query": "caméra de sécurité manifestation assise images brutes",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "manifestation assise",
+      "rationale_zh": "覆盖安防摄像头中的坐地示威。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    },
+    {
+      "query_id": "dav11-sit-in-fr-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "fr",
+      "query": "vidéosurveillance sit-in bloquant l'entrée images brutes",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "sit-in bloquant l'entrée",
+      "rationale_zh": "用法语视频监控强锚点检索静坐阻挡入口。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。"
+    }
+  ],
+  "revision_from": "demand_action_v1.qp.v1.0.0",
+  "revision_reason": "首轮任务合格池不足；保持动作词和中文定义不变，追加多语言原始录像线索，配合平台间严格轮转。"
+}

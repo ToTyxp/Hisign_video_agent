@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.1.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/chinese-concepts.v1.0.0.freeze.json",
+  "source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，人物手持、展示、高举牌子或展开横幅。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "core_concepts": [
+          "举牌",
+          "手持标语牌",
+          "手持抗议牌",
+          "展示标语牌",
+          "高举牌子",
+          "竖起标语牌",
+          "拉横幅",
+          "展开横幅",
+          "手持横幅",
+          "展示横幅",
+          "标语抗议",
+          "横幅抗议",
+          "举牌抗议",
+          "举牌请愿",
+          "举牌示威",
+          "站立抗议",
+          "小规模抗议",
+          "小规模示威",
+          "门口抗议",
+          "街边抗议",
+          "纠察举牌",
+          "罢工举牌"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T04:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user",
+  "content_sha256": "bee91e92bd15bf4287381e24c63fec3f36b2a7662b79881d26bc6faf893c740d",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "手机举牌 v1.0 来源合格池偏小；保留来源门，放宽平台搜索表达为shorts/reel/短视频格式锚点加举牌动作词。",
+  "queries": [
+    {
+      "query_id": "sav11-sign-banner-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "protest sign shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "protest sign",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "protesters holding signs short video",
+      "source_anchor": "short video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "protesters holding signs",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "protest banner vertical video",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "protest banner",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "picket sign reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "picket sign",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "holding placard mobile video",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "holding placard",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "cartel de protesta video corto",
+      "source_anchor": "video corto",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "cartel de protesta",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "manifestantes con carteles video vertical",
+      "source_anchor": "video vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestantes con carteles",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "pancarta de protesta shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "pancarta de protesta",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "piquete con cartel reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "piquete con cartel",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "sosteniendo pancarta vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "sosteniendo pancarta",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "pancarte de protestation vidéo courte",
+      "source_anchor": "vidéo courte",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "pancarte de protestation",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "manifestants avec pancartes vidéo verticale",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestants avec pancartes",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "banderole de protestation shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "banderole de protestation",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "piquet avec pancarte reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "piquet avec pancarte",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    },
+    {
+      "query_id": "sav11-sign-banner-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "tenant une pancarte vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "tenant une pancarte",
+      "rationale_zh": "用户观察到短视频平台存在较多举牌样本；使用短视频格式词作为手机邻近来源锚点，动作短语不加引号以避免平台搜索过度收窄。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.0.0"
+}

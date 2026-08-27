@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.2.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/sign-action-concepts.v1.0.0.freeze.json",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T05:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user",
+  "content_sha256": "9cc36d8c5287af0fca42cca77c441c5b6494632904a4ce760325311d33787b8a",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "用户明确冻结1至5人小规模举牌；第三组查询用于估计是否能将潜在可用量从约32扩展到60。",
+  "queries": [
+    {
+      "query_id": "sav12-small-sign-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "lone protester holding sign shorts street",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "lone protester holding sign",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "one person with protest sign phone video sidewalk",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "one person with protest sign",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "small group holding signs vertical video outside store",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "small group holding signs",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "individual holding placard reel roadside",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "individual holding placard",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "few protesters with banner mobile video entrance",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "few protesters with banner",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "manifestante solo con cartel shorts calle",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestante solo con cartel",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "una persona con cartel de protesta video de teléfono acera",
+      "source_anchor": "video de teléfono",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "una persona con cartel de protesta",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "grupo pequeño con carteles video vertical entrada de tienda",
+      "source_anchor": "video vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "grupo pequeño con carteles",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "persona sosteniendo pancarta reel carretera",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "persona sosteniendo pancarta",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "pocos manifestantes con pancarta vídeo móvil entrada",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "pocos manifestantes con pancarta",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "manifestant seul avec pancarte shorts rue",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestant seul avec pancarte",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "une personne avec pancarte de protestation filmé au téléphone trottoir",
+      "source_anchor": "filmé au téléphone",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "une personne avec pancarte de protestation",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "petit groupe avec pancartes vidéo verticale entrée de magasin",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "petit groupe avec pancartes",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "personne tenant une pancarte reel bord de route",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "personne tenant une pancarte",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    },
+    {
+      "query_id": "sav12-small-sign-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "quelques manifestants avec banderole vidéo mobile entrée",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "quelques manifestants avec banderole",
+      "rationale_zh": "用户冻结1至5人小规模定义；查询同时包含手机/短视频来源锚点、单人或小组举牌动作和自然场景词。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.1.0"
+}

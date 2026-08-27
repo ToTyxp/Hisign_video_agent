@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "demand_action_v1.qp.v1.3.0",
+  "campaign_id": "demand_action_v1",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/chinese-concepts.proposal.md",
+  "source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控来源中，人物通过举牌或横幅、下跪、静坐等持续性身体行动表达诉求、抗议、请愿或要求。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "core_concepts": [
+          "举牌",
+          "手持标语牌",
+          "手持抗议牌",
+          "展示标语牌",
+          "高举牌子",
+          "竖起标语牌",
+          "拉横幅",
+          "展开横幅",
+          "手持横幅",
+          "展示横幅",
+          "标语抗议",
+          "横幅抗议",
+          "举牌抗议",
+          "举牌请愿",
+          "举牌示威",
+          "站立抗议",
+          "小规模抗议",
+          "小规模示威",
+          "门口抗议",
+          "街边抗议",
+          "纠察举牌",
+          "罢工举牌"
+        ]
+      },
+      {
+        "subtype": "下跪",
+        "target_definition": "人物有意维持跪姿，并与抗议、请愿、请求或明确诉求相关。",
+        "core_concepts": [
+          "下跪",
+          "跪地",
+          "双膝跪地",
+          "单膝跪地",
+          "集体下跪",
+          "当众下跪",
+          "跪地抗议",
+          "下跪抗议",
+          "跪地请愿",
+          "下跪请愿",
+          "跪地请求",
+          "下跪请求",
+          "跪求",
+          "跪地表达诉求",
+          "跪在门口",
+          "跪在大厅",
+          "跪在街边"
+        ]
+      },
+      {
+        "subtype": "静坐",
+        "target_definition": "人物有意坐在地面或占据某处，并与抗议、请愿、阻挡或表达诉求相关。",
+        "core_concepts": [
+          "静坐",
+          "静坐抗议",
+          "静坐请愿",
+          "坐地抗议",
+          "坐地请愿",
+          "集体静坐",
+          "集体坐地",
+          "门口静坐",
+          "大厅静坐",
+          "街边静坐",
+          "占据入口",
+          "占据大厅",
+          "坐地阻挡入口",
+          "坐地阻塞通道",
+          "和平静坐",
+          "持续坐地表达诉求"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T02:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user",
+  "content_sha256": "fac4231591ab2ca4c9b17b4ed0546954f9c4dda10ee77191456e9d1d57b6b217",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "queries": [
+    {
+      "query_id": "dav13-sign-banner-en-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "CCTV \"holding a protest sign\"",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "holding a protest sign",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-en-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "security camera \"protest banner\"",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "protest banner",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-en-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "surveillance footage \"picket sign\"",
+      "source_anchor": "surveillance footage",
+      "action_or_scene_term": "picket sign",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-es-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "cámara de vigilancia \"manifestante con cartel\"",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "manifestante con cartel",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-es-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "cámara de seguridad \"pancarta de protesta\"",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "pancarta de protesta",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-es-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "videovigilancia \"piquete con cartel\"",
+      "source_anchor": "videovigilancia",
+      "action_or_scene_term": "piquete con cartel",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-fr-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "caméra de surveillance \"manifestant avec pancarte\"",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "manifestant avec pancarte",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-fr-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "caméra de sécurité \"banderole de protestation\"",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "banderole de protestation",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sign-banner-fr-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "vidéosurveillance \"piquet avec pancarte\"",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "piquet avec pancarte",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-en-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "en",
+      "query": "CCTV \"kneeling protest\"",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "kneeling protest",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-en-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "en",
+      "query": "security camera \"on knees begging\"",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "on knees begging",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-en-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "en",
+      "query": "surveillance footage \"kneeling plea\"",
+      "source_anchor": "surveillance footage",
+      "action_or_scene_term": "kneeling plea",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-es-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "es",
+      "query": "cámara de vigilancia \"protesta de rodillas\"",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "protesta de rodillas",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-es-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "es",
+      "query": "cámara de seguridad \"de rodillas pidiendo ayuda\"",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "de rodillas pidiendo ayuda",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-es-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "es",
+      "query": "videovigilancia \"súplica de rodillas\"",
+      "source_anchor": "videovigilancia",
+      "action_or_scene_term": "súplica de rodillas",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-fr-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "fr",
+      "query": "caméra de surveillance \"manifestation à genoux\"",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "manifestation à genoux",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-fr-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "fr",
+      "query": "caméra de sécurité \"à genoux pour demander de l'aide\"",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "à genoux pour demander de l'aide",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-kneeling-fr-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "下跪",
+      "lang": "fr",
+      "query": "vidéosurveillance \"supplie à genoux\"",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "supplie à genoux",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-en-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "en",
+      "query": "CCTV \"sit-in protest\"",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "sit-in protest",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-en-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "en",
+      "query": "security camera \"seated protest\"",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "seated protest",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-en-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "en",
+      "query": "surveillance footage \"sitting blockade\"",
+      "source_anchor": "surveillance footage",
+      "action_or_scene_term": "sitting blockade",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-es-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "es",
+      "query": "cámara de vigilancia \"sentada de protesta\"",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "sentada de protesta",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-es-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "es",
+      "query": "cámara de seguridad \"manifestantes sentados\"",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "manifestantes sentados",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-es-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "es",
+      "query": "videovigilancia \"bloqueo sentados\"",
+      "source_anchor": "videovigilancia",
+      "action_or_scene_term": "bloqueo sentados",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-fr-01",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "fr",
+      "query": "caméra de surveillance \"sit-in de protestation\"",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "sit-in de protestation",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-fr-02",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "fr",
+      "query": "caméra de sécurité \"manifestants assis\"",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "manifestants assis",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    },
+    {
+      "query_id": "dav13-sit-in-fr-03",
+      "campaign_id": "demand_action_v1",
+      "subtype": "静坐",
+      "lang": "fr",
+      "query": "vidéosurveillance \"blocage assis\"",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "blocage assis",
+      "rationale_zh": "保持冻结中文动作边界；移除会稀释检索的地点词与泛化原始性词，使用带引号的本语言动作短语锁定结果。"
+    }
+  ],
+  "revision_from": "demand_action_v1.qp.v1.2.0",
+  "revision_reason": "两轮可视 Pilot 的 demand 任务可用率为0/6；不改变冻结中文语义、来源门或评分阈值，仅将多语言查询改为短动作短语锁定，以收集新数据。"
+}

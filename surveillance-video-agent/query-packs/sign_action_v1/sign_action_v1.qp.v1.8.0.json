@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.8.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/sign-action-concepts.v1.0.0.freeze.json",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T14:30:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user_feedback",
+  "content_sha256": "6e76a9706215f99b17c777f1954861e0df4de9f54794188216346492e85bb33f",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "第二批6/19任务可用、8/19来源正确；不降低门槛，新增另一组小规模UGC表达并配合已验证的人工反馈重排。",
+  "queries": [
+    {
+      "query_id": "sav18-sign-banner-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "lone protester holding cardboard sign #shorts",
+      "source_anchor": "#shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "lone protester holding cardboard sign",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "woman standing with handwritten protest sign phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "woman standing with handwritten protest sign",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "man displaying protest placard vertical video",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "man displaying protest placard",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "two people holding protest banner short video",
+      "source_anchor": "short video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "two people holding protest banner",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "small picket line mobile video",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "small picket line",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "manifestante solo con cartel de cartón shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestante solo con cartel de cartón",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "mujer de pie con cartel de protesta escrito a mano vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "mujer de pie con cartel de protesta escrito a mano",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "hombre mostrando pancarta de protesta vídeo vertical",
+      "source_anchor": "vídeo vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "hombre mostrando pancarta de protesta",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "dos personas sosteniendo pancarta de protesta video corto",
+      "source_anchor": "video corto",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "dos personas sosteniendo pancarta de protesta",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "pequeño piquete video móvil",
+      "source_anchor": "video móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "pequeño piquete",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "manifestant seul avec pancarte en carton shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestant seul avec pancarte en carton",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "femme debout avec pancarte de protestation manuscrite vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "femme debout avec pancarte de protestation manuscrite",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "homme montrant pancarte de protestation vidéo verticale",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "homme montrant pancarte de protestation",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "deux personnes tenant banderole de protestation vidéo courte",
+      "source_anchor": "vidéo courte",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "deux personnes tenant banderole de protestation",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    },
+    {
+      "query_id": "sav18-sign-banner-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "petit piquet vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "petit piquet",
+      "rationale_zh": "第二批仍缺安全余量；保持手机来源和举牌动作双锚点，用纸板牌、手写牌、1至2人和小型纠察表达扩展新数据。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.7.0"
+}

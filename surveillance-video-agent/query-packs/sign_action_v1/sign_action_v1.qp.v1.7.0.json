@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.7.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/sign-action-concepts.v1.0.0.freeze.json",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T13:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user_feedback",
+  "content_sha256": "ad94d58fc79db2811beada8abcd98ecec4dd8d7c65765bc143bf3c5a8566a4ad",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "本轮18条人工反馈仅6条来源正确；转向UGC/单人自然表达收集更多数据，保持0.440阈值、1至5人上限和全部硬排除不变。",
+  "queries": [
+    {
+      "query_id": "sav17-sign-banner-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "one person holding protest sign #shorts",
+      "source_anchor": "#shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "one person holding protest sign",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "woman holding protest placard phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "woman holding protest placard",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "man holding picket sign vertical video",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "man holding picket sign",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "my protest sign short video",
+      "source_anchor": "short video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "my protest sign",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "standing with protest banner mobile video",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "standing with protest banner",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "una persona sosteniendo cartel de protesta shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "una persona sosteniendo cartel de protesta",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "mujer con pancarta de protesta vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "mujer con pancarta de protesta",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "hombre con cartel de protesta vídeo vertical",
+      "source_anchor": "vídeo vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "hombre con cartel de protesta",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "mi cartel de protesta video corto",
+      "source_anchor": "video corto",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "mi cartel de protesta",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "persona de pie con pancarta de protesta reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "persona de pie con pancarta de protesta",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "une personne tenant une pancarte de protestation shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "une personne tenant une pancarte de protestation",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "femme avec pancarte de protestation vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "femme avec pancarte de protestation",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "homme tenant pancarte de protestation vidéo verticale",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "homme tenant pancarte de protestation",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "ma pancarte de protestation vidéo courte",
+      "source_anchor": "vidéo courte",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "ma pancarte de protestation",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    },
+    {
+      "query_id": "sav17-sign-banner-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "personne debout avec banderole de protestation reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "personne debout avec banderole de protestation",
+      "rationale_zh": "人工反馈显示新闻包装过多；保持手机来源与举牌动作双锚点，用单人、人物和第一人称表达扩展UGC搜索空间，不修改门槛。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.6.0"
+}
