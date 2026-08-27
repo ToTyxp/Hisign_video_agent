@@ -18,4 +18,5 @@ Candidate_Downloads/
 
 __pycache__/
 *.py[cod]
+*.egg-info/
 *.part
