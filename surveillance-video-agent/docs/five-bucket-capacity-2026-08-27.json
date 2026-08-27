@@ -1,0 +1,197 @@
+{
+  "schema_version": "five_bucket_capacity_v1",
+  "source_of_truth": "SQLite human labels and auditable queue/download records",
+  "external_dashboard_notice": "DEV/EVAL counts are user-provided targets. The current SQLite schema has no split assignment; this report does not synthesize split labels.",
+  "buckets": [
+    {
+      "bucket": "fight_positive",
+      "dashboard": {
+        "dev_current": 13,
+        "dev_target": 10,
+        "eval_current": 35,
+        "eval_target": 50,
+        "remaining_gap": 15,
+        "split_assignable_in_sqlite": false
+      },
+      "mapping": {
+        "status": "proxy_only",
+        "mapping": "仅有 fight_confounder_v1 中被人工纠正为打架/斗殴的反例",
+        "boundary": "不存在独立的 fight-positive campaign、正样本查询包或 DEV/EVAL 分配。"
+      },
+      "candidate_budget": {
+        "observed_human_usable_rate": 0.3333333333333333,
+        "wilson_95_lower": 0.13812009109121315,
+        "downloads_at_point_estimate": 45,
+        "downloads_at_wilson_lower": 109,
+        "interpretation": "代理证据不可用于自动放宽门槛；未映射桶必须先有新冻结定义和首批人工校准。"
+      },
+      "evidence": {
+        "campaign_id": "fight_confounder_v1",
+        "subtype": "reviewer-corrected 打架/打架斗殴",
+        "successes": 4,
+        "determinate": 12,
+        "description": "探索性代理：来自原本的类打斗对照 campaign，不能替代正样本查询的校准。"
+      }
+    },
+    {
+      "bucket": "protest_small_positive",
+      "dashboard": {
+        "dev_current": 7,
+        "dev_target": 10,
+        "eval_current": 0,
+        "eval_target": 50,
+        "remaining_gap": 53,
+        "split_assignable_in_sqlite": false
+      },
+      "mapping": {
+        "status": "direct",
+        "mapping": "sign_action_v1 / 举牌/横幅",
+        "boundary": "仅 1–5 名直接参与者；大规模游行/密集群众是硬排除。"
+      },
+      "candidate_budget": {
+        "observed_human_usable_rate": 0.36923076923076925,
+        "wilson_95_lower": 0.26229395874070904,
+        "downloads_at_point_estimate": 144,
+        "downloads_at_wilson_lower": 203,
+        "interpretation": "以人工 task_usable 为成功，预算是需要进入人工标注的技术成功下载数。"
+      },
+      "evidence": {
+        "campaign_id": "sign_action_v1",
+        "subtype": "举牌/横幅（冻结为 1–5 名直接参与者）",
+        "successes": 24,
+        "determinate": 65,
+        "description": "直接语义映射；未判定的 5 条按失败计入分母，作为保守口径。"
+      }
+    },
+    {
+      "bucket": "protest_large_positive",
+      "dashboard": {
+        "dev_current": 8,
+        "dev_target": 10,
+        "eval_current": 0,
+        "eval_target": 50,
+        "remaining_gap": 52,
+        "split_assignable_in_sqlite": false
+      },
+      "mapping": {
+        "status": "unmapped",
+        "mapping": "无现有 campaign/subtype",
+        "boundary": "sign_action_v1 明确硬排除大规模抗议；demand_action_v1 不记录人数尺度且处于 hold。"
+      },
+      "candidate_budget": {
+        "observed_human_usable_rate": null,
+        "wilson_95_lower": null,
+        "downloads_at_point_estimate": null,
+        "downloads_at_wilson_lower": null,
+        "interpretation": "零直接样本：先完成新定义下的首批人工校准，不能由其他桶借用命中率。"
+      },
+      "evidence": null
+    },
+    {
+      "bucket": "fight_like_control",
+      "dashboard": {
+        "dev_current": 10,
+        "dev_target": 10,
+        "eval_current": 9,
+        "eval_target": 50,
+        "remaining_gap": 41,
+        "split_assignable_in_sqlite": false
+      },
+      "mapping": {
+        "status": "direct_with_review",
+        "mapping": "fight_confounder_v1 / 四个非攻击性对照 subtype",
+        "boundary": "只计人工 task_usable=true；被纠正为打架/斗殴者不可计入对照。"
+      },
+      "candidate_budget": {
+        "observed_human_usable_rate": 0.5833333333333334,
+        "wilson_95_lower": 0.3195113125495498,
+        "downloads_at_point_estimate": 71,
+        "downloads_at_wilson_lower": 129,
+        "interpretation": "以人工 task_usable 为成功，预算是需要进入人工标注的技术成功下载数。"
+      },
+      "evidence": {
+        "campaign_id": "fight_confounder_v1",
+        "subtype": "四个非攻击性对照 subtype",
+        "successes": 7,
+        "determinate": 12,
+        "description": "直接任务映射；样本仍小，预算仅可作先验。"
+      }
+    },
+    {
+      "bucket": "protest_like_control",
+      "dashboard": {
+        "dev_current": 0,
+        "dev_target": 10,
+        "eval_current": 0,
+        "eval_target": 50,
+        "remaining_gap": 60,
+        "split_assignable_in_sqlite": false
+      },
+      "mapping": {
+        "status": "unmapped",
+        "mapping": "无现有 campaign/subtype",
+        "boundary": "当前三个冻结 query pack 都没有“类抗议非抗议对照”的定义或人工标签。"
+      },
+      "candidate_budget": {
+        "observed_human_usable_rate": null,
+        "wilson_95_lower": null,
+        "downloads_at_point_estimate": null,
+        "downloads_at_wilson_lower": null,
+        "interpretation": "零直接样本：先完成新定义下的首批人工校准，不能由其他桶借用命中率。"
+      },
+      "evidence": null
+    }
+  ],
+  "technical_success": [
+    {
+      "campaign_id": "demand_action_v1",
+      "assigned": 15,
+      "downloaded": 11
+    },
+    {
+      "campaign_id": "fight_confounder_v1",
+      "assigned": 15,
+      "downloaded": 12
+    },
+    {
+      "campaign_id": "sign_action_v1",
+      "assigned": 91,
+      "downloaded": 91
+    }
+  ],
+  "sign_action_operational_metrics": {
+    "human_usable_target": 60,
+    "human_usable_confirmed": 24,
+    "cumulative_task_determinate": 60,
+    "cumulative_source_correct": 29,
+    "cumulative_source_determinate": 62,
+    "remaining_human_usable_gap": 36,
+    "candidate_budget": 180,
+    "candidate_budget_consumed": 91,
+    "candidate_budget_remaining": 89,
+    "required_future_human_usable_rate": 0.4044943820224719,
+    "latest_batch": {
+      "batch_id": "0875d625-72be-4de5-af01-b8fcd95ed805",
+      "run_id": "five-bucket-small-positive-batch2-20260827",
+      "status": "completed",
+      "released_count": 20,
+      "eligible_count": 16,
+      "technical_success_count": 16,
+      "human_labels": {
+        "label_count": 0,
+        "task_usable_count": null,
+        "task_determinate_count": null,
+        "source_correct_count": null,
+        "source_determinate_count": null
+      }
+    },
+    "manifest": {
+      "path": "/Users/yangxp/Desktop/Work_hisign/ytb异常视频下载/Candidate_Downloads/sign_action_v1/manifest.jsonl",
+      "record_count": 91,
+      "complete_record_count": 91,
+      "unique_candidate_keys": 91,
+      "unique_sha256": 91
+    },
+    "sha256_duplicate_edges": 0
+  }
+}

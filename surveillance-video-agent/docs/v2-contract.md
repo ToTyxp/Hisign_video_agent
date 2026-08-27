@@ -13,7 +13,7 @@
 5. 下载后只做技术验证，不产生语义接受结论；系统任何位置都不得写入 v2 状态 `accepted`。
 6. 来源合格阈值固定为 `source_score >= 4`。样本不足时停止并报告，不能降低该阈值。
 7. SQLite 是候选状态、评分证据和审计事件的唯一事实源；Manifest 是从 SQLite 确定性导出的交付视图。
-8. v1 网络配置固定为 `default`；VPN/代理实验不进入本版本。
+8. v1 网络配置固定为 `default`：继承启动进程的既有网络环境，但应用不得主动设置、清空或切换代理；VPN/代理对照实验不进入本版本。
 9. 所有时间使用 UTC ISO 8601，文件哈希使用 SHA-256，所有落盘元数据必须先脱敏。
 10. `Candidate DB != Qualified Frontier != Secondary Batch`：候选库可以很大，只有通过硬门和分数门的候选才能竞争 Frontier，昂贵的二次筛选每次只消费一个小批次。
 11. 撒网、资格筛选、二次筛选和下载是四个可独立恢复的阶段。下载器只能消费二次筛选明确标记为 `download_eligible` 的候选。
@@ -251,14 +251,23 @@ PRAGMA busy_timeout = 5000
 | `campaign_policy_versions` | `(campaign_id, policy_version)` | 保存不可变的 subtype 数量上限和 campaign 总数上限 |
 | `frontier_policy_versions` | `(campaign_id, frontier_policy_version)` | 保存 batch、probe 和低有效率停止策略 |
 | `embedding_schema_versions` | `embedding_schema_version` | 保存 provider、model、维度、距离函数、文本模板和规范化规则 |
+| `semantic_query_templates` | `template_version` | 保存不可变 subtype 查询文本模板和内容哈希 |
 | `vector_index_outbox` | `event_id` | 在 SQLite 事务内记录带投影修订号的待 upsert/rebuild 向量事件 |
 | `candidate_embeddings` | `(candidate_key, embedding_schema_version, vector_name)` | 保存当前投影修订号、当前输入哈希、已索引输入哈希、Qdrant point ID和索引就绪状态，不重复保存向量正文 |
 | `query_packs` | `query_pack_version` | 保存冻结中文定义、内容哈希和冻结状态 |
 | `queries` | `query_id`；包内查询唯一 | 保存 lang、来源锚点、动作/场景词和最终查询文本 |
 | `search_cache` | `(platform, query, lang, query_pack_version, network_config)` | 保存搜索响应、获取时间、过期时间和脱敏载荷 |
 | `probe_cache` | `(platform, source_id, network_config)` | 保存归一化 probe 元数据、脱敏原始载荷和过期时间 |
+| `adapter_calls` | `request_id` | 不可变记录适配器操作、缓存命中、耗时、错误分类与次数 |
+| `embedding_calls` | `call_id` | 不可变记录 provider/model、输入哈希、数量、耗时与错误，不复制文本或向量 |
 | `candidates` | `candidate_key`；`(platform, source_id)` 唯一 | 候选规范元数据、来源状态、来源总分和 camera pool |
 | `candidate_discoveries` | `discovery_id`；候选+查询+位置唯一 | 保存候选被哪些查询、语言和版本发现 |
+| `subtype_semantic_queries` | `query_key`；campaign/subtype/pack/template/schema 唯一 | 保存版本化查询文本、输入哈希、Qdrant point和索引状态，不保存向量正文 |
+| `threshold_calibrations` | `calibration_id` | 保存 uploader 分组校准报告及 subtype 阈值；样本不足时阈值对象必须为空 |
+| `calibration_exports` | `export_id` | 保存待外部人工填写的 metadata-only JSONL 路径、哈希和 subtype 数量 |
+| `probe_selections` | `(campaign_id, query_pack_version, candidate_key)` | 持久化累计 probe 预算、稳定选择排名及完成状态，重跑不得扩池 |
+| `secondary_batch_yields` | `batch_id` | 保存真实二筛释放数、合格数、yield和低有效率标记 |
+| `campaign_run_control` | `(run_id, campaign_id)` | 保存连续低有效率批次和停止原因 |
 | `score_evidence` | `evidence_id` | 保存 source/task 每个规则的分值、理由和字段证据 |
 | `candidate_task_scores` | `(candidate_key, campaign_id, subtype)` | 保存独立任务分和计算版本 |
 | `frontier_entries` | `(candidate_key, campaign_id, subtype)` | 保存合格候选的排序证据、分区和 Frontier 生命周期 |
@@ -277,6 +286,7 @@ PRAGMA busy_timeout = 5000
 | `media_publish_intents` | `attempt_id` 唯一 | 保存临时路径、最终路径、哈希和可恢复的发布阶段 |
 | `state_transitions` | `transition_id` | 追加式状态审计日志 |
 | `legacy_downloads` | `candidate_key` | 迁移 YouTube ID、原状态和 provenance，不写 v2 `accepted` |
+| `legacy_imports` | `import_id` | 不可变记录旧历史哈希、导入数量、先验数量和缺失 metadata 数 |
 | `uploader_priors` | `platform, uploader_id` | 保存完成样本数、可追溯 ID和最终 0..2 正先验 |
 
 ### 7.2 `candidates` 必备字段
@@ -481,6 +491,9 @@ low_yield_partition_window_size = 20
 - 每个 campaign 最大：30GB，以最终媒体实际字节数计。
 - 全局只有一个下载 worker。
 - campaign/任务切换之间随机冷却 10–20 秒，实际冷却值写入审计日志。
+- yt-dlp 提取请求之间至少冷却 1 秒，HTTP、fragment 和 extractor 重试使用有上限的指数退避；fragment 并发固定为 1。
+- worker 对 `network`、`rate_limited`、`timeout` 最多执行 2 次额外重试，默认退避 20 秒、40 秒并增加至多 5 秒抖动。每次写入不可变 `download_retry_events`；其他错误不得重试。
+- YouTube/Dailymotion 使用项目虚拟环境锁定的 yt-dlp 与浏览器指纹依赖，不得静默回退到系统 Homebrew/全局版本。YouTube 使用 IPv4和受支持 JavaScript runtime，但不硬编码 player client。
 
 静态元数据已确定违反限制的候选不得排队。下载时仍使用工具级上限；实际产物违反限制则进入 `technical_failed`。
 
@@ -636,12 +649,12 @@ Manifest 完整率定义为：所有进入 `task_queued` 的候选都有一行�
 8. 已采纳：Candidate DB、Qualified Frontier 和 Secondary Batch 正式解耦，不构造固定大小的 secondary pool。
 9. 已采纳：默认每批释放 20 条；按 subtype 缺额轮转，再按 platform/lang 轮转；上传者全局最多 5 条。
 10. 已修订：SQLite 是唯一控制面，Qdrant 是本地持久化、可重建的语义索引；v1 不使用大模型上下文二筛。
-11. 待确认：Qdrant 使用 `relevance` 与 `duplicate` 两个 named vectors，collection 按 embedding schema version 隔离。
-12. 待确认：Batch Generator 默认从 Qdrant 临时召回 K×5，以 RRF 合并确定性排名和向量排名，再做公平轮转。
-13. 待确认：向量只生成疑似重复簇；同簇一次只释放一个代表，不能仅凭相似度永久删除候选。
-14. 待确认：下载后 SHA-256 重复新增终态 `duplicate_suppressed`，不发布、不计数、不冒充技术失败。
-15. 待确认：默认连续 3 个有效窗口 `<10%` 时暂停 query/subtype；Campaign 连续 3 批 `<10%` 时停止并回到查询包修订。
-16. 待确认：embedding 模型、语义阈值和近重复阈值在后续实现/测试阶段选定，但必须作为不可变版本写入 run 和 Manifest。
+11. 已实现：Qdrant 使用 `relevance` 与 `duplicate` 两个 named vectors，collection 按 embedding schema version 隔离。
+12. 已实现：Batch Generator 从 Qdrant 临时召回 K×5，以 RRF 合并确定性排名和向量排名，再做公平轮转。
+13. 已实现：向量只生成疑似重复簇；同簇一次只释放一个代表，不能仅凭相似度永久删除候选。无人工 pair 校准时显式禁用 vector cluster 抑制。
+14. 已实现：下载后 SHA-256 重复进入 `duplicate_suppressed`，不发布、不计数、不冒充技术失败。
+15. 已实现：连续 3 个有效窗口 `<10%` 时暂停 query/subtype；Campaign 连续 3 批 `<10%` 时停止并回到查询包修订。
+16. 部分完成：embedding 已冻结为 `qwen3.7-text-embedding` 1024维并通过真实 smoke；语义阈值和近重复阈值必须由外部人工标签校准，当前不设置经验值。
 
 ## 15. 架构依据
 
