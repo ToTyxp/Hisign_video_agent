@@ -69,14 +69,33 @@ STATE_DB = PROJECT_ROOT / ".surveillance-pool/state/candidates.sqlite3"
 QDRANT_PATH = PROJECT_ROOT / ".surveillance-pool/vector/qdrant"
 INTERNAL_ROOT = PROJECT_ROOT / ".surveillance-pool"
 OUTPUT_ROOT = WORKSPACE_ROOT / "Candidate_Downloads"
-SCORING_POLICY = PROJECT_ROOT / "query-packs/scoring-policy.v1.8.0.json"
+SCORING_POLICY = PROJECT_ROOT / "query-packs/scoring-policy.v1.9.0.json"
+
+
+def _query_pack_minor(path: Path) -> int:
+    marker = ".qp.v1."
+    if marker not in path.name:
+        return -1
+    return int(path.name.split(marker, 1)[1].split(".", 1)[0])
+
+
+SIGN_QUERY_PACKS = tuple(
+    sorted(
+        (PROJECT_ROOT / "query-packs/sign_action_v1").glob(
+            "sign_action_v1.qp.v1.*.json"
+        ),
+        key=_query_pack_minor,
+    )
+)
 QUERY_PACKS = {
     "demand_action_v1": PROJECT_ROOT
     / "query-packs/demand_action_v1/demand_action_v1.qp.v1.3.0.json",
     "fight_confounder_v1": PROJECT_ROOT
-    / "query-packs/fight_confounder_v1/fight_confounder_v1.qp.v1.2.0.json",
+    / "query-packs/fight_confounder_v1/fight_confounder_v1.qp.v1.10.0.json",
     "sign_action_v1": PROJECT_ROOT
-    / "query-packs/sign_action_v1/sign_action_v1.qp.v1.10.0.json",
+    / SIGN_QUERY_PACKS[-1].relative_to(PROJECT_ROOT),
+    "fight_positive_v1": PROJECT_ROOT
+    / "query-packs/fight_positive_v1/fight_positive_v1.qp.v1.4.0.json",
 }
 
 
@@ -1163,10 +1182,11 @@ def run_sign_scale_activate_command() -> dict[str, Any]:
     current_pack = QUERY_PACKS[campaign_id]
     current_version = _query_pack_version(current_pack)
     broad_pack = current_pack
+    ensemble_packs = SIGN_QUERY_PACKS
     discovery_versions = tuple(
-        f"sign_action_v1.qp.v1.{minor}.0" for minor in range(11)
+        _query_pack_version(path) for path in ensemble_packs
     )
-    eligibility_policy = "sign-increment-broad-semantic-0.44-v1.0.0"
+    eligibility_policy = "sign-increment-multi-query-semantic-0.44-v1.0.0"
     with CandidateDatabase(STATE_DB) as database, QdrantVectorIndex(
         QDRANT_PATH
     ) as index:
@@ -1177,6 +1197,7 @@ def run_sign_scale_activate_command() -> dict[str, Any]:
             config={
                 "campaign_id": campaign_id,
                 "ranking_query_pack": str(broad_pack),
+                "eligibility_query_packs": [str(path) for path in ensemble_packs],
                 "attributed_query_pack_version": current_version,
                 "threshold": 0.44,
                 "batch_size": 20,
@@ -1191,13 +1212,17 @@ def run_sign_scale_activate_command() -> dict[str, Any]:
             semantic = SemanticQueryVectorService(
                 database, index, provider, QWEN_SCHEMA
             )
-            broad = semantic.prepare(run_id=run_id, query_pack_path=broad_pack)
+            sign_vectors = []
+            for path in ensemble_packs:
+                database.register_frozen_query_pack(path)
+                prepared = semantic.prepare(run_id=run_id, query_pack_path=path)
+                sign_vectors.append(prepared.vectors["举牌/横幅"])
             eligibility = recall.apply_threshold_override(
                 run_id=run_id,
                 campaign_query_vectors={
                     campaign_id: (
                         current_version,
-                        {"举牌/横幅": broad.vectors["举牌/横幅"]},
+                        {"举牌/横幅": tuple(sign_vectors)},
                     )
                 },
                 scoring_policy_version=_scoring_policy_version(),
@@ -1231,9 +1256,9 @@ def run_sign_scale_activate_command() -> dict[str, Any]:
                 feedback_task_weight=0.5,
                 feedback_source_weight=0.25,
                 reason=(
-                    "Use the frozen base vector for the 0.44 gate and a leave-one-out "
-                    "validated human-feedback centroid only for ranking; small-scale "
-                    "numeric and lexical counterexamples remain hard gates"
+                    "Require max similarity >=0.44 across frozen sign query vectors; "
+                    "human-feedback centroid affects ranking only; small-scale numeric "
+                    "and lexical counterexamples remain hard gates"
                 ),
             )
             database.connection.execute(
@@ -1264,6 +1289,217 @@ def run_sign_scale_activate_command() -> dict[str, Any]:
                 run_id,
                 status="failed",
                 result={"stage": "sign_scale_activation"},
+            )
+            raise
+
+
+def run_fight_scale_activate_command() -> dict[str, Any]:
+    """Activate only current-policy fight-control candidates at the frozen 0.40 gate."""
+
+    initialize_state(import_legacy=True)
+    run_id = "fight-scale-activate-" + str(uuid.uuid4())
+    campaign_id = "fight_confounder_v1"
+    current_pack = QUERY_PACKS[campaign_id]
+    current_version = _query_pack_version(current_pack)
+    discovery_versions = tuple(
+        f"fight_confounder_v1.qp.v1.{minor}.0" for minor in range(11)
+    )
+    eligibility_policy = "fight-control-increment-semantic-0.40-v1.0.0"
+    with CandidateDatabase(STATE_DB) as database, QdrantVectorIndex(
+        QDRANT_PATH
+    ) as index:
+        database.initialize()
+        database.create_run(
+            run_id,
+            "fight-control-frontier-activation",
+            config={
+                "campaign_id": campaign_id,
+                "query_pack": str(current_pack),
+                "threshold": 0.40,
+                "batch_size": 20,
+            },
+        )
+        try:
+            provider = DashScopeQwenEmbeddingProvider()
+            recall = CalibrationSemanticRecallService(
+                database, index, provider, QWEN_SCHEMA
+            )
+            index_result = recall.prepare_index(run_id=run_id)
+            semantic = SemanticQueryVectorService(
+                database, index, provider, QWEN_SCHEMA
+            )
+            prepared = semantic.prepare(
+                run_id=run_id, query_pack_path=current_pack
+            )
+            eligibility = recall.apply_threshold_override(
+                run_id=run_id,
+                campaign_query_vectors={
+                    campaign_id: (current_version, prepared.vectors)
+                },
+                scoring_policy_version=_scoring_policy_version(),
+                threshold=0.40,
+                policy_version=eligibility_policy,
+                required_discovery_query_pack_versions={
+                    campaign_id: discovery_versions
+                },
+                required_source_policy_version=_scoring_policy_version(),
+            )
+            dedupe = bootstrap_safe_dedupe_policy(database, QWEN_SCHEMA)
+            active = database.connection.execute(
+                """
+                SELECT active_frontier_policy_version FROM campaigns
+                WHERE campaign_id = ?
+                """,
+                (campaign_id,),
+            ).fetchone()
+            frontier = create_user_override_frontier_policy(
+                database,
+                campaign_id=campaign_id,
+                expected_version=active["active_frontier_policy_version"],
+                query_pack_version=current_version,
+                embedding_schema_version=QWEN_SCHEMA.version,
+                dedupe_policy_version=dedupe.version,
+                semantic_eligibility_policy_version=eligibility_policy,
+                threshold=0.40,
+                batch_size=20,
+                allowed_camera_pools=("surveillance",),
+                reason=(
+                    "Expand only the frozen non-attack fight-control campaign; "
+                    "the original 0.40 semantic and surveillance source gates remain"
+                ),
+            )
+            database.connection.execute(
+                """
+                INSERT INTO campaign_hold_events(
+                    event_id, campaign_id, action, reason, run_id, created_at
+                ) VALUES (?, ?, 'release', ?, ?, datetime('now'))
+                """,
+                (
+                    str(uuid.uuid4()),
+                    campaign_id,
+                    "release versioned fight-control discovery pool only",
+                    run_id,
+                ),
+            )
+            output = {
+                "run_id": run_id,
+                "campaign_id": campaign_id,
+                "index": asdict(index_result),
+                "eligibility": _jsonable(asdict(eligibility)),
+                "frontier_policy_version": frontier.policy.version,
+                "downloads_attempted": False,
+            }
+            database.finish_run(run_id, status="completed", result=output)
+            return output
+        except Exception:
+            database.finish_run(
+                run_id,
+                status="failed",
+                result={"stage": "fight_control_activation"},
+            )
+            raise
+
+
+def run_fight_positive_activate_command() -> dict[str, Any]:
+    """Activate the independent frozen real-fight campaign at the 0.40 gate."""
+
+    initialize_state(import_legacy=True)
+    run_id = "fight-positive-activate-" + str(uuid.uuid4())
+    campaign_id = "fight_positive_v1"
+    current_pack = QUERY_PACKS[campaign_id]
+    current_version = _query_pack_version(current_pack)
+    eligibility_policy = "fight-positive-semantic-0.40-v1.0.0"
+    with CandidateDatabase(STATE_DB) as database, QdrantVectorIndex(
+        QDRANT_PATH
+    ) as index:
+        database.initialize()
+        database.create_run(
+            run_id,
+            "fight-positive-frontier-activation",
+            config={
+                "campaign_id": campaign_id,
+                "query_pack": str(current_pack),
+                "threshold": 0.40,
+                "batch_size": 20,
+            },
+        )
+        try:
+            provider = DashScopeQwenEmbeddingProvider()
+            recall = CalibrationSemanticRecallService(
+                database, index, provider, QWEN_SCHEMA
+            )
+            index_result = recall.prepare_index(run_id=run_id)
+            semantic = SemanticQueryVectorService(
+                database, index, provider, QWEN_SCHEMA
+            )
+            prepared = semantic.prepare(
+                run_id=run_id, query_pack_path=current_pack
+            )
+            eligibility = recall.apply_threshold_override(
+                run_id=run_id,
+                campaign_query_vectors={
+                    campaign_id: (current_version, prepared.vectors)
+                },
+                scoring_policy_version=_scoring_policy_version(),
+                threshold=0.40,
+                policy_version=eligibility_policy,
+                required_discovery_query_pack_versions={
+                    campaign_id: (current_version,)
+                },
+                required_source_policy_version=_scoring_policy_version(),
+            )
+            dedupe = bootstrap_safe_dedupe_policy(database, QWEN_SCHEMA)
+            active = database.connection.execute(
+                """
+                SELECT active_frontier_policy_version FROM campaigns
+                WHERE campaign_id = ?
+                """,
+                (campaign_id,),
+            ).fetchone()
+            frontier = create_user_override_frontier_policy(
+                database,
+                campaign_id=campaign_id,
+                expected_version=active["active_frontier_policy_version"],
+                query_pack_version=current_version,
+                embedding_schema_version=QWEN_SCHEMA.version,
+                dedupe_policy_version=dedupe.version,
+                semantic_eligibility_policy_version=eligibility_policy,
+                threshold=0.40,
+                batch_size=20,
+                allowed_camera_pools=("surveillance",),
+                reason=(
+                    "Independent frozen real-fight campaign; fixed surveillance "
+                    "source and original 0.40 semantic gates remain mandatory"
+                ),
+            )
+            database.connection.execute(
+                """
+                INSERT INTO campaign_hold_events(
+                    event_id, campaign_id, action, reason, run_id, created_at
+                ) VALUES (?, ?, 'release', ?, ?, datetime('now'))
+                """,
+                (
+                    str(uuid.uuid4()),
+                    campaign_id,
+                    "release independent fight-positive v1 pool only",
+                    run_id,
+                ),
+            )
+            output = {
+                "run_id": run_id,
+                "campaign_id": campaign_id,
+                "index": asdict(index_result),
+                "eligibility": _jsonable(asdict(eligibility)),
+                "frontier_policy_version": frontier.policy.version,
+                "downloads_attempted": False,
+            }
+            database.finish_run(run_id, status="completed", result=output)
+            return output
+        except Exception:
+            database.finish_run(
+                run_id,
+                status="failed",
+                result={"stage": "fight_positive_activation"},
             )
             raise
 
@@ -1453,6 +1689,8 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("sign-mobile-activate")
     subparsers.add_parser("sign-small-activate")
     subparsers.add_parser("sign-scale-activate")
+    subparsers.add_parser("fight-scale-activate")
+    subparsers.add_parser("fight-positive-activate")
 
     batch = subparsers.add_parser("batch")
     batch.add_argument("--campaign", required=True, choices=sorted(QUERY_PACKS))
@@ -1505,6 +1743,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = run_sign_small_activate_command()
         elif args.command == "sign-scale-activate":
             result = run_sign_scale_activate_command()
+        elif args.command == "fight-scale-activate":
+            result = run_fight_scale_activate_command()
+        elif args.command == "fight-positive-activate":
+            result = run_fight_positive_activate_command()
         else:
             result = run_batch_command(args)
     except Exception as error:

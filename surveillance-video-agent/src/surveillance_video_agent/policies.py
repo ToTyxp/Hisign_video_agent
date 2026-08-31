@@ -37,6 +37,12 @@ DEFAULT_CAMPAIGN_POLICIES = (
         subtype_limits=(("举牌/横幅", 60),),
         max_candidates=60,
     ),
+    CampaignPolicy(
+        campaign_id="fight_positive_v1",
+        version="fight_positive_v1.capacity.v1.0.0",
+        subtype_limits=(("真实打架/斗殴", 60),),
+        max_candidates=60,
+    ),
 )
 
 
@@ -255,6 +261,9 @@ def get_frontier_policy(
         feedback_rerank_policy_version=payload.get("feedback_rerank_policy_version"),
         feedback_task_weight=float(payload.get("feedback_task_weight", 0.0)),
         feedback_source_weight=float(payload.get("feedback_source_weight", 0.0)),
+        semantic_eligibility_policy_version=payload.get(
+            "semantic_eligibility_policy_version"
+        ),
     )
     return FrontierPolicyRecord(
         campaign_id=campaign_id,
@@ -422,7 +431,21 @@ def create_user_override_frontier_policy(
         raise ValueError("user override camera pools are invalid")
     campaign_policy = get_campaign_policy(database, campaign_id)
     subtypes = [name for name, _ in campaign_policy.subtype_limits]
+    subtype_limits = dict(campaign_policy.subtype_limits)
     for subtype in subtypes:
+        downloaded = int(
+            database.connection.execute(
+                """
+                SELECT COUNT(*) FROM queue_assignments q
+                JOIN candidates c ON c.candidate_key = q.candidate_key
+                WHERE q.campaign_id = ? AND q.subtype = ?
+                  AND c.status = 'downloaded'
+                """,
+                (campaign_id, subtype),
+            ).fetchone()[0]
+        )
+        if downloaded >= subtype_limits[subtype]:
+            continue
         exists = database.connection.execute(
             """
             SELECT 1 FROM semantic_task_eligibility
@@ -467,6 +490,7 @@ def create_user_override_frontier_policy(
         feedback_rerank_policy_version=feedback_rerank_policy_version,
         feedback_task_weight=feedback_task_weight,
         feedback_source_weight=feedback_source_weight,
+        semantic_eligibility_policy_version=semantic_eligibility_policy_version,
     )
     payload = {
         "batch_size": batch_size,

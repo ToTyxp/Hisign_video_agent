@@ -334,13 +334,28 @@ class CalibrationSemanticRecallService:
                             scoring_policy_version,
                         )
                     ]
-                    matches = self.index.query_calibration_relevance(
-                        self.schema,
-                        query_vector,
-                        candidate_keys=allowed,
-                        limit=len(allowed),
-                    )
-                    qualifying = [item for item in matches if item.score > threshold]
+                    if query_vector and isinstance(query_vector[0], (int, float)):
+                        vectors = (query_vector,)
+                    else:
+                        vectors = tuple(query_vector)
+                    if not vectors:
+                        raise ValueError("at least one semantic query vector is required")
+                    best_matches = {}
+                    for vector in vectors:
+                        matches = self.index.query_calibration_relevance(
+                            self.schema,
+                            vector,
+                            candidate_keys=allowed,
+                            limit=len(allowed),
+                        )
+                        for item in matches:
+                            previous = best_matches.get(item.candidate_key)
+                            if previous is None or item.score > previous.score:
+                                best_matches[item.candidate_key] = item
+                    qualifying = [
+                        item for item in best_matches.values()
+                        if item.score > threshold
+                    ]
                     counts.setdefault(campaign_id, {})[subtype] = len(qualifying)
                     for match in qualifying:
                         eligibility_id = str(

@@ -49,6 +49,7 @@ class FrontierPolicy:
     feedback_rerank_policy_version: str | None = None
     feedback_task_weight: float = 0.0
     feedback_source_weight: float = 0.0
+    semantic_eligibility_policy_version: str | None = None
 
     def __post_init__(self) -> None:
         if not self.version:
@@ -163,7 +164,16 @@ def generate_secondary_batch(
         raise ValueError(f"missing subtype query vectors: {', '.join(missing_vectors)}")
     ready_rows = database.connection.execute(
         """
-        SELECT f.*, c.uploader_id, c.uploader, c.channel
+        SELECT f.*, c.uploader_id, c.uploader, c.channel,
+               (
+                   SELECT MAX(s.similarity)
+                   FROM semantic_task_eligibility s
+                   WHERE s.candidate_key = f.candidate_key
+                     AND s.campaign_id = f.campaign_id
+                     AND s.subtype = f.subtype
+                     AND s.embedding_schema_version = f.embedding_schema_version
+                     AND (? IS NULL OR s.policy_version = ?)
+               ) AS audited_semantic_similarity
         FROM frontier_entries f
         JOIN candidates c ON c.candidate_key = f.candidate_key
         WHERE f.run_id = ? AND f.campaign_id = ? AND f.status = 'ready'
@@ -172,6 +182,8 @@ def generate_secondary_batch(
           AND f.dedupe_policy_version = ?
         """,
         (
+            frontier_policy.semantic_eligibility_policy_version,
+            frontier_policy.semantic_eligibility_policy_version,
             run_id,
             campaign_policy.campaign_id,
             frontier_policy.version,
@@ -219,6 +231,10 @@ def generate_secondary_batch(
             eligibility_scores = {
                 item.candidate_key: item.score for item in eligibility_matches
             }
+        for row in rows:
+            audited = row["audited_semantic_similarity"]
+            if audited is not None:
+                eligibility_scores[row["candidate_key"]] = float(audited)
         matched_rows = [row for row in rows if row["candidate_key"] in vector_scores]
         deterministic_order = [
             row["candidate_key"]
