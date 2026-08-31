@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "fight_positive_v1.qp.v1.0.0",
+  "campaign_id": "fight_positive_v1",
+  "concept_pack_version": "fight_positive_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/fight-positive-concepts.v1.0.0.freeze.json",
+  "source_sha256": "655fc37498d8bfc997d63208f988ec6cce8b4150b19d532b63856216750613d7",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控、安防摄像头或门铃摄像头记录的真实现场中，真实人物发生实际身体攻击或互殴，包括拳打、脚踢、掌掴、摔打、扭打和多人群殴。排除只有口角或对峙、玩闹、舞蹈、训练/对练、事故、影视游戏动画、教程广告、新闻包装，以及以枪击或持刀袭击为主而非徒手打架的事件。",
+    "subtypes": [
+      {
+        "subtype": "真实打架/斗殴",
+        "core_concepts": [
+          "真实打架",
+          "实际斗殴",
+          "互相殴打",
+          "拳打脚踢",
+          "挥拳击打",
+          "连续踢打",
+          "掌掴",
+          "摔打",
+          "扭打",
+          "街头斗殴",
+          "多人群殴",
+          "身体攻击"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T20:30:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user",
+  "content_sha256": "5c4cb9f34aeaea454515c7001323f68e692ad45f9e99aa30ce29c92ac446bbbb",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "用户要求独立下载60条真实打架正样本；从旧只读CCTV打架边界迁移。",
+  "queries": [
+    {
+      "query_id": "fpv1-fight-en-01",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "CCTV fist fight raw footage",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "fist fight",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-en-02",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "security camera people punching and kicking raw video",
+      "source_anchor": "security camera",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "people punching and kicking",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-en-03",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "surveillance camera street brawl uncut",
+      "source_anchor": "surveillance camera",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "street brawl",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-en-04",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "CCTV group fight caught on camera",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "group fight",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-en-05",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "security footage physical fight parking lot",
+      "source_anchor": "security footage",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "physical fight",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-es-01",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "CCTV pelea a puñetazos grabación original",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea a puñetazos",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-es-02",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "cámara de seguridad personas golpeándose y pateando video sin editar",
+      "source_anchor": "cámara de seguridad",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "personas golpeándose y pateando",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-es-03",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "cámara de vigilancia pelea callejera grabación completa",
+      "source_anchor": "cámara de vigilancia",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea callejera",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-es-04",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "CCTV pelea grupal captada por cámara",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea grupal",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-es-05",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "grabación de vigilancia pelea física estacionamiento",
+      "source_anchor": "grabación de vigilancia",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea física",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-fr-01",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "CCTV bagarre à coups de poing vidéo brute",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre à coups de poing",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-fr-02",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "caméra de sécurité personnes donnant coups de poing et de pied vidéo brute",
+      "source_anchor": "caméra de sécurité",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "personnes donnant coups de poing et de pied",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-fr-03",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "caméra de surveillance bagarre de rue séquence complète",
+      "source_anchor": "caméra de surveillance",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre de rue",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-fr-04",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "CCTV bagarre de groupe filmée par caméra",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre de groupe",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    },
+    {
+      "query_id": "fpv1-fight-fr-05",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "enregistrement de surveillance bagarre physique parking",
+      "source_anchor": "enregistrement de surveillance",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre physique",
+      "rationale_zh": "固定监控来源强锚点与真实身体打架动作同时出现；不检索非攻击对照。"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "fight_positive_v1.qp.v1.1.0",
+  "campaign_id": "fight_positive_v1",
+  "concept_pack_version": "fight_positive_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/fight-positive-concepts.v1.0.0.freeze.json",
+  "source_sha256": "655fc37498d8bfc997d63208f988ec6cce8b4150b19d532b63856216750613d7",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控、安防摄像头或门铃摄像头记录的真实现场中，真实人物发生实际身体攻击或互殴，包括拳打、脚踢、掌掴、摔打、扭打和多人群殴。排除只有口角或对峙、玩闹、舞蹈、训练/对练、事故、影视游戏动画、教程广告、新闻包装，以及以枪击或持刀袭击为主而非徒手打架的事件。",
+    "subtypes": [
+      {
+        "subtype": "真实打架/斗殴",
+        "core_concepts": [
+          "真实打架",
+          "实际斗殴",
+          "互相殴打",
+          "拳打脚踢",
+          "挥拳击打",
+          "连续踢打",
+          "掌掴",
+          "摔打",
+          "扭打",
+          "街头斗殴",
+          "多人群殴",
+          "身体攻击"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T21:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "derived_from_frozen_user_concepts",
+  "content_sha256": "320233e02c3566f7da7950ee00aefe7a424d2be77987af7c89e8a0c2009ef4b5",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "v1.0下载27条后Frontier耗尽；增加长尾地点，不改变语义边界。",
+  "queries": [
+    {
+      "query_id": "fpv11-fight-en-01",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "CCTV fist fight convenience store raw footage",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "fist fight convenience store",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-en-02",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "security camera brawl elevator lobby raw video",
+      "source_anchor": "security camera",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "brawl elevator lobby",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-en-03",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "surveillance camera physical fight bar entrance uncut",
+      "source_anchor": "surveillance camera",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "physical fight bar entrance",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-en-04",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "CCTV group fight gas station caught on camera",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "group fight gas station",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-en-05",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "en",
+      "query": "security footage people punching warehouse aisle",
+      "source_anchor": "security footage",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "people punching warehouse aisle",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-es-01",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "CCTV pelea a puñetazos tienda grabación original",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea a puñetazos tienda",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-es-02",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "cámara de seguridad pelea vestíbulo de ascensor video sin editar",
+      "source_anchor": "cámara de seguridad",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea vestíbulo de ascensor",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-es-03",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "cámara de vigilancia pelea física entrada de bar grabación completa",
+      "source_anchor": "cámara de vigilancia",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea física entrada de bar",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-es-04",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "CCTV pelea grupal gasolinera captada por cámara",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "pelea grupal gasolinera",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-es-05",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "es",
+      "query": "grabación de vigilancia personas golpeándose pasillo de almacén",
+      "source_anchor": "grabación de vigilancia",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "personas golpeándose pasillo de almacén",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-fr-01",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "CCTV bagarre à coups de poing supérette vidéo brute",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre à coups de poing supérette",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-fr-02",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "caméra de sécurité bagarre hall ascenseur vidéo brute",
+      "source_anchor": "caméra de sécurité",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre hall ascenseur",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-fr-03",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "caméra de surveillance bagarre physique entrée de bar séquence complète",
+      "source_anchor": "caméra de surveillance",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre physique entrée de bar",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-fr-04",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "CCTV bagarre de groupe station-service filmée par caméra",
+      "source_anchor": "CCTV",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "bagarre de groupe station-service",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    },
+    {
+      "query_id": "fpv11-fight-fr-05",
+      "campaign_id": "fight_positive_v1",
+      "subtype": "真实打架/斗殴",
+      "lang": "fr",
+      "query": "enregistrement de surveillance personnes donnant coups de poing allée entrepôt",
+      "source_anchor": "enregistrement de surveillance",
+      "source_pool": "surveillance",
+      "action_or_scene_term": "personnes donnant coups de poing allée entrepôt",
+      "rationale_zh": "从冻结真实打架定义派生便利店、电梯厅、酒吧入口、加油站和仓库长尾地点；只扩数据，不改变固定监控来源或0.40门。"
+    }
+  ],
+  "revision_from": "fight_positive_v1.qp.v1.0.0"
+}

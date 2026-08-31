@@ -1,0 +1,509 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "fight_confounder_v1.qp.v1.3.0",
+  "campaign_id": "fight_confounder_v1",
+  "concept_pack_version": "surveillance_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/chinese-concepts.proposal.md",
+  "source_sha256": "a372ee6a840ea8ff9f8e4aeb3f7b35707c8db361b20a07afc531f45d8d20e18a",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控来源中，外观或场景容易被误判为攻击/打架，但元数据指向非攻击行为或没有发生攻击的候选。",
+    "subtypes": [
+      {
+        "subtype": "冲突但未攻击",
+        "target_definition": "存在明显冲突、敌意或紧张姿态，但没有拳打、脚踢、掌掴、冲撞、摔投、勒颈、武器攻击等实际攻击动作。",
+        "core_concepts": [
+          "争吵",
+          "口角",
+          "激烈争论",
+          "言语冲突",
+          "面对面对峙",
+          "对峙",
+          "僵持",
+          "紧张对峙",
+          "相互指责",
+          "指手画脚",
+          "愤怒交谈",
+          "激烈手势",
+          "近距离争执",
+          "阻拦但未动手",
+          "冲突升级前",
+          "差点打起来",
+          "没有动手",
+          "未发生攻击",
+          "被旁人劝开"
+        ]
+      },
+      {
+        "subtype": "舞蹈/玩闹/训练",
+        "target_definition": "动作可能类似挥拳、踢腿、拉扯或追逐，但语境明确是舞蹈、游戏、友好玩闹、训练或排练，没有真实攻击意图。",
+        "core_concepts": [
+          "跳舞",
+          "双人舞",
+          "群体舞蹈",
+          "即兴舞蹈",
+          "派对跳舞",
+          "庆祝舞蹈",
+          "玩闹",
+          "打闹",
+          "嬉闹",
+          "追逐玩耍",
+          "假装打架",
+          "模拟对打",
+          "友好切磋",
+          "拳击训练",
+          "武术训练",
+          "格斗训练",
+          "摔跤训练",
+          "对练",
+          "陪练",
+          "影子拳",
+          "动作排练"
+        ]
+      },
+      {
+        "subtype": "非攻击性身体接触",
+        "target_definition": "存在人与人的身体接触，但接触是友好、照护、协助、偶然或日常行为，不包含攻击意图。",
+        "core_concepts": [
+          "拥抱",
+          "握手",
+          "击掌",
+          "拍肩",
+          "拉手",
+          "搀扶",
+          "扶起",
+          "帮助站立",
+          "引导行走",
+          "照护",
+          "安慰",
+          "友好拉扯",
+          "正常搬抬",
+          "递交物品时接触",
+          "意外碰撞",
+          "擦肩碰撞",
+          "拥挤接触",
+          "人群中身体接触"
+        ]
+      },
+      {
+        "subtype": "场景先验",
+        "target_definition": "场景本身常与冲突事件共同出现，容易形成“打架场景”先验，但候选元数据不指向攻击行为。场景词必须与普通行为或无攻击概念组合，不能只搜索真实打架事件。",
+        "scene_concepts": [
+          "酒吧门口",
+          "夜店入口",
+          "商店收银台",
+          "便利店内",
+          "超市入口",
+          "停车场",
+          "地下车库",
+          "加油站",
+          "小区门口",
+          "公寓入口",
+          "楼道",
+          "电梯",
+          "楼梯间",
+          "校园走廊",
+          "车站站台",
+          "公交站",
+          "仓库",
+          "工厂车间",
+          "办公区",
+          "饭店入口"
+        ],
+        "ordinary_behavior_concepts": [
+          "等待",
+          "排队",
+          "交谈",
+          "站立",
+          "坐着",
+          "经过",
+          "进出",
+          "徘徊",
+          "聚集",
+          "分散",
+          "日常活动",
+          "无冲突",
+          "没有打架",
+          "没有攻击"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T20:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "derived_from_frozen_user_concepts",
+  "content_sha256": "8184c98da215c240236ddfbb260393f672bbc011cc8ca59e2e1e82f0a8efd1fc",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "queries": [
+    {
+      "query_id": "fcv13-conflict-no-attack-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "en",
+      "query": "CCTV heated argument raw footage warehouse aisle",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "heated argument",
+      "rationale_zh": "检索 CCTV 中有明显争执但尚未指向攻击的场景。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "en",
+      "query": "surveillance camera face-off no fight raw footage elevator lobby",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "face-off no fight",
+      "rationale_zh": "覆盖固定监控中面对面对峙但没有打架。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "en",
+      "query": "security camera verbal confrontation raw footage hotel entrance",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "verbal confrontation",
+      "rationale_zh": "覆盖安防摄像头中的言语冲突。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "es",
+      "query": "cámara de vigilancia discusión acalorada grabación original pasillo de almacén",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "discusión acalorada",
+      "rationale_zh": "检索西语监控元数据中的激烈争吵。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "es",
+      "query": "cámara de seguridad enfrentamiento sin pelea grabación original vestíbulo de ascensor",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "enfrentamiento sin pelea",
+      "rationale_zh": "覆盖安防摄像头中的对峙但没有打架。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "es",
+      "query": "circuito cerrado de televisión conflicto verbal grabación original entrada de hotel",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "conflicto verbal",
+      "rationale_zh": "用闭路电视强锚点检索言语冲突。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "fr",
+      "query": "caméra de surveillance dispute animée images brutes allée d'entrepôt",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "dispute animée",
+      "rationale_zh": "检索法语监控元数据中的激烈争吵。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "fr",
+      "query": "caméra de sécurité face-à-face sans bagarre images brutes hall d'ascenseur",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "face-à-face sans bagarre",
+      "rationale_zh": "覆盖安防摄像头中的面对面对峙但没有打架。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-conflict-no-attack-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "冲突但未攻击",
+      "lang": "fr",
+      "query": "vidéosurveillance confrontation verbale images brutes entrée d'hôtel",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "confrontation verbale",
+      "rationale_zh": "用法语视频监控强锚点检索言语冲突。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "en",
+      "query": "CCTV people dancing raw footage warehouse aisle",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "people dancing",
+      "rationale_zh": "检索 CCTV 自然记录的舞蹈行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "en",
+      "query": "surveillance camera friends play fighting raw footage elevator lobby",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "friends play fighting",
+      "rationale_zh": "覆盖固定监控中朋友间的假装打架或玩闹。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "en",
+      "query": "security camera martial arts training raw footage hotel entrance",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "martial arts training",
+      "rationale_zh": "检索安防摄像头自然记录的武术训练，后续硬排除教学视频。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "es",
+      "query": "cámara de vigilancia personas bailando grabación original pasillo de almacén",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "personas bailando",
+      "rationale_zh": "检索西语监控元数据中的自然舞蹈行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "es",
+      "query": "cámara de seguridad amigos jugando a pelear grabación original vestíbulo de ascensor",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "amigos jugando a pelear",
+      "rationale_zh": "覆盖安防摄像头中朋友间的玩闹对打。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "es",
+      "query": "circuito cerrado de televisión entrenamiento de artes marciales grabación original entrada de hotel",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "entrenamiento de artes marciales",
+      "rationale_zh": "用闭路电视强锚点检索自然发生的武术训练，教学内容仍硬排除。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "fr",
+      "query": "caméra de surveillance personnes dansant images brutes allée d'entrepôt",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "personnes dansant",
+      "rationale_zh": "检索法语监控元数据中的自然舞蹈行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "fr",
+      "query": "caméra de sécurité jeu de bagarre entre amis images brutes hall d'ascenseur",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "jeu de bagarre entre amis",
+      "rationale_zh": "覆盖安防摄像头中朋友间的玩闹对打。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-play-training-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "舞蹈/玩闹/训练",
+      "lang": "fr",
+      "query": "vidéosurveillance entraînement aux arts martiaux images brutes entrée d'hôtel",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "entraînement aux arts martiaux",
+      "rationale_zh": "用法语视频监控强锚点检索自然发生的武术训练，教学内容仍硬排除。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "en",
+      "query": "CCTV people hugging raw footage warehouse aisle",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "people hugging",
+      "rationale_zh": "检索 CCTV 中容易被动作模型误判的拥抱。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "en",
+      "query": "surveillance camera helping person stand up raw footage elevator lobby",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "helping person stand up",
+      "rationale_zh": "覆盖固定监控中的搀扶和帮助站立。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "en",
+      "query": "security camera accidental collision between people raw footage hotel entrance",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "accidental collision between people",
+      "rationale_zh": "明确检索安防摄像头中的人与人意外身体碰撞，避免车辆事故。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "es",
+      "query": "cámara de vigilancia personas abrazándose grabación original pasillo de almacén",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "personas abrazándose",
+      "rationale_zh": "检索西语监控元数据中的拥抱行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "es",
+      "query": "cámara de seguridad ayudando a levantarse grabación original vestíbulo de ascensor",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "ayudando a levantarse",
+      "rationale_zh": "覆盖安防摄像头中的搀扶和帮助站立。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "es",
+      "query": "circuito cerrado de televisión choque accidental entre personas grabación original entrada de hotel",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "choque accidental entre personas",
+      "rationale_zh": "用闭路电视强锚点检索人与人意外身体碰撞，避免车辆事故。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "fr",
+      "query": "caméra de surveillance personnes qui se prennent dans les bras images brutes allée d'entrepôt",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "personnes qui se prennent dans les bras",
+      "rationale_zh": "检索法语监控元数据中的拥抱行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "fr",
+      "query": "caméra de sécurité aide à se relever images brutes hall d'ascenseur",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "aide à se relever",
+      "rationale_zh": "覆盖安防摄像头中的搀扶和帮助站立。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-contact-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "非攻击性身体接触",
+      "lang": "fr",
+      "query": "vidéosurveillance collision accidentelle entre personnes images brutes entrée d'hôtel",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "collision accidentelle entre personnes",
+      "rationale_zh": "用法语视频监控强锚点检索人与人意外身体碰撞，避免车辆事故。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-en-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "en",
+      "query": "CCTV convenience store customers waiting raw footage warehouse aisle",
+      "source_anchor": "CCTV",
+      "action_or_scene_term": "convenience store customers waiting",
+      "rationale_zh": "组合便利店场景与普通等待行为，避免只检索真实冲突。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-en-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "en",
+      "query": "surveillance camera elevator lobby people talking raw footage elevator lobby",
+      "source_anchor": "surveillance camera",
+      "action_or_scene_term": "elevator lobby people talking",
+      "rationale_zh": "组合停车场先验与普通交谈行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-en-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "en",
+      "query": "security camera hotel entrance no fight raw footage hotel entrance",
+      "source_anchor": "security camera",
+      "action_or_scene_term": "hotel entrance no fight",
+      "rationale_zh": "组合公寓入口场景和明确无打架语义。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-es-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "es",
+      "query": "cámara de vigilancia clientes esperando en tienda de conveniencia grabación original pasillo de almacén",
+      "source_anchor": "cámara de vigilancia",
+      "action_or_scene_term": "clientes esperando en tienda de conveniencia",
+      "rationale_zh": "组合便利店场景与普通等待行为，避免真实冲突语义。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-es-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "es",
+      "query": "cámara de seguridad personas hablando en vestíbulo de ascensor grabación original vestíbulo de ascensor",
+      "source_anchor": "cámara de seguridad",
+      "action_or_scene_term": "personas hablando en vestíbulo de ascensor",
+      "rationale_zh": "组合停车场先验与普通交谈行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-es-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "es",
+      "query": "circuito cerrado de televisión entrada de hotel sin pelea grabación original entrada de hotel",
+      "source_anchor": "circuito cerrado de televisión",
+      "action_or_scene_term": "entrada de hotel sin pelea",
+      "rationale_zh": "组合公寓入口场景和明确无打架语义。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-fr-01",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "fr",
+      "query": "caméra de surveillance clients attendant dans une supérette images brutes allée d'entrepôt",
+      "source_anchor": "caméra de surveillance",
+      "action_or_scene_term": "clients attendant dans une supérette",
+      "rationale_zh": "组合便利店场景与普通等待行为，避免真实冲突语义。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-fr-02",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "fr",
+      "query": "caméra de sécurité personnes discutant dans un hall d'ascenseur images brutes hall d'ascenseur",
+      "source_anchor": "caméra de sécurité",
+      "action_or_scene_term": "personnes discutant dans un hall d'ascenseur",
+      "rationale_zh": "组合停车场先验与普通交谈行为。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    },
+    {
+      "query_id": "fcv13-scene-prior-fr-03",
+      "campaign_id": "fight_confounder_v1",
+      "subtype": "场景先验",
+      "lang": "fr",
+      "query": "vidéosurveillance entrée d'hôtel sans bagarre images brutes entrée d'hôtel",
+      "source_anchor": "vidéosurveillance",
+      "action_or_scene_term": "entrée d'hôtel sans bagarre",
+      "rationale_zh": "组合公寓入口场景和明确无打架语义。 v1.1 追加本语言原始录像线索；动作词与中文语义边界不变。 v1.2 仅增加受约束地点切片以收集更多数据；动作词、来源锚点和评分边界不变。 v1.3只替换为仓库、电梯厅和酒店入口长尾地点；非攻击边界不变。"
+    }
+  ],
+  "revision_from": "fight_confounder_v1.qp.v1.2.0",
+  "revision_reason": "用户将类打架技术成功目标设为120；旧激活池耗尽，仅增加长尾地点，保持四个非攻击subtype、固定监控来源和0.40语义门不变。"
+}

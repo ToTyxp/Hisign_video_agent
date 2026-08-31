@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "concept_pack_version": "fight_positive_zh_concepts_v1.0.0",
+  "campaign_id": "fight_positive_v1",
+  "campaign_definition": "固定监控、安防摄像头或门铃摄像头记录的真实现场中，真实人物发生实际身体攻击或互殴，包括拳打、脚踢、掌掴、摔打、扭打和多人群殴。排除只有口角或对峙、玩闹、舞蹈、训练/对练、事故、影视游戏动画、教程广告、新闻包装，以及以枪击或持刀袭击为主而非徒手打架的事件。",
+  "subtypes": [
+    {
+      "subtype": "真实打架/斗殴",
+      "core_concepts": [
+        "真实打架",
+        "实际斗殴",
+        "互相殴打",
+        "拳打脚踢",
+        "挥拳击打",
+        "连续踢打",
+        "掌掴",
+        "摔打",
+        "扭打",
+        "街头斗殴",
+        "多人群殴",
+        "身体攻击"
+      ]
+    }
+  ],
+  "frozen_at": "2026-08-27",
+  "frozen_by": "user",
+  "freeze_evidence": "用户明确要求同时下载60条打架视频；旧只读工作流将目标限定为CCTV打架、不是电视包装，本版本将其迁移为独立v2正样本Campaign。",
+  "content_sha256_scope": "canonical JSON excluding content_sha256",
+  "content_sha256": "655fc37498d8bfc997d63208f988ec6cce8b4150b19d532b63856216750613d7"
+}
