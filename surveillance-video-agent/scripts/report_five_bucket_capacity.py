@@ -28,6 +28,9 @@ DASHBOARD = {
     "fight_like_control": {"dev_current": 10, "dev_target": 10, "eval_current": 9, "eval_target": 50},
     "protest_like_control": {"dev_current": 0, "dev_target": 10, "eval_current": 0, "eval_target": 50},
 }
+EXCLUDED_DOWNLOAD_BUCKETS = frozenset(
+    {"protest_large_positive", "protest_like_control"}
+)
 
 
 @dataclass(frozen=True)
@@ -111,6 +114,12 @@ def _evidence(connection: sqlite3.Connection) -> dict[str, Evidence]:
 
 
 def _mapping(bucket: str, evidence: Evidence | None) -> dict[str, str]:
+    if bucket in EXCLUDED_DOWNLOAD_BUCKETS:
+        return {
+            "status": "excluded_by_user",
+            "mapping": "不纳入当前下载范围",
+            "boundary": "用户已明确排除；不得搜索、probe、激活或下载。",
+        }
     if bucket == "protest_small_positive":
         return {
             "status": "direct",
@@ -154,8 +163,20 @@ def report(connection: sqlite3.Connection) -> dict:
             "candidate_budget": None,
         }
         item["dashboard"]["split_assignable_in_sqlite"] = False
+        item["download_scope"] = (
+            "excluded" if bucket in EXCLUDED_DOWNLOAD_BUCKETS else "included_or_pending_definition"
+        )
         observed = evidence.get(bucket)
-        if observed is not None:
+        if bucket in EXCLUDED_DOWNLOAD_BUCKETS:
+            item["evidence"] = None
+            item["candidate_budget"] = {
+                "observed_human_usable_rate": None,
+                "wilson_95_lower": None,
+                "downloads_at_point_estimate": None,
+                "downloads_at_wilson_lower": None,
+                "interpretation": "用户已排除，不建立统计容量或下载队列。",
+            }
+        elif observed is not None:
             rate = observed.successes / observed.determinate if observed.determinate else None
             lower = wilson_lower(observed.successes, observed.determinate)
             item["evidence"] = asdict(observed)
