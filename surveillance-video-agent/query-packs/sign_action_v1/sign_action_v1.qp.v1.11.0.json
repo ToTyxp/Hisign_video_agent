@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.11.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/sign-action-concepts.v1.0.0.freeze.json",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-27T20:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-27",
+  "frozen_by": "derived_from_frozen_user_concepts",
+  "content_sha256": "0270a69038dfa553560f2a87551ee747f85ef3f62756808d4a56746119e11dc2",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "用户将技术成功目标提高到300；旧激活池耗尽，增加未覆盖长尾地点，保持任务定义、来源门、反馈排序和语义阈值不变。",
+  "queries": [
+    {
+      "query_id": "sav111-sign-banner-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "single picketer outside hospital phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "single picketer outside hospital",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "worker holding union sign at warehouse gate vertical video",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "worker holding union sign at warehouse gate",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "two tenants holding rent protest signs sidewalk short video",
+      "source_anchor": "short video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "two tenants holding rent protest signs sidewalk",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "person holding boycott placard supermarket entrance mobile video",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "person holding boycott placard supermarket entrance",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "small group holding protest banner university gate phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "small group holding protest banner university gate",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "una persona en piquete frente a hospital vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "una persona en piquete frente a hospital",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "trabajador con cartel sindical en puerta de almacén vídeo vertical",
+      "source_anchor": "vídeo vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "trabajador con cartel sindical en puerta de almacén",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "dos inquilinos con carteles de protesta por alquiler video corto",
+      "source_anchor": "video corto",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "dos inquilinos con carteles de protesta por alquiler",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "persona con pancarta de boicot en entrada de supermercado vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "persona con pancarta de boicot en entrada de supermercado",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "grupo pequeño con pancarta de protesta en puerta universitaria vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "grupo pequeño con pancarta de protesta en puerta universitaria",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "une personne en piquet devant hôpital vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "une personne en piquet devant hôpital",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "travailleur avec pancarte syndicale au portail entrepôt vidéo verticale",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "travailleur avec pancarte syndicale au portail entrepôt",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "deux locataires avec pancartes de protestation loyer vidéo courte",
+      "source_anchor": "vidéo courte",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "deux locataires avec pancartes de protestation loyer",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "personne avec pancarte boycott entrée supermarché vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "personne avec pancarte boycott entrée supermarché",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav111-sign-banner-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "petit groupe avec banderole de protestation portail université vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "petit groupe avec banderole de protestation portail université",
+      "rationale_zh": "从冻结的1至5人举牌定义派生医院、仓库、租户、超市和大学门口长尾场景；只增加搜索数据，不改变0.440门或大规模硬排除。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.10.0"
+}

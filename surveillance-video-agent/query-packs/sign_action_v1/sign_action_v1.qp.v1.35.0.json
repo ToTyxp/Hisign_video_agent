@@ -1,0 +1,320 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.35.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/sign-action-concepts.v1.0.0.freeze.json",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-28T21:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-28",
+  "frozen_by": "derived_from_frozen_user_concepts",
+  "content_sha256": "64b31cd3eae8613fe4beb08c8a55b165e5a55a773898dba35c6885af0f87bbdc",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "v1.34 Frontier耗尽；使用未覆盖的乡镇广场、体育场、宗教/文化场所、郊区商业区及区域交通设施，配合新上传者移动拍摄表达；保持1至5人、来源门、0.440最大相似度和150 probe上限。",
+  "queries": [
+    {
+      "query_id": "sav135-venue-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "my neighborhood one-person picket holding cardboard sign at rural town square phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "my neighborhood one-person picket holding cardboard sign at rural town square",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "our two-person banner action outside stadium parking lot #shorts",
+      "source_anchor": "#shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "our two-person banner action outside stadium parking lot",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "solo silent protest with handwritten placard at community church sidewalk reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "solo silent protest with handwritten placard at community church sidewalk",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "small group holding message boards near cultural festival entrance vertical video",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "small group holding message boards near cultural festival entrance",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "my local phone clip of one person raising paper sign at suburban shopping arcade short video",
+      "source_anchor": "short video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "my local phone clip of one person raising paper sign at suburban shopping arcade",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-06",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "two residents showing slogan signs outside village council hall mobile video",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "two residents showing slogan signs outside village council hall",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-07",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "one-person demonstration with information placard at sports center gate #shorts",
+      "source_anchor": "#shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "one-person demonstration with information placard at sports center gate",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-en-08",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "our small community banner action beside regional bus terminal phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "our small community banner action beside regional bus terminal",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "mi piquete de una persona con cartel de cartón en plaza de pueblo rural vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "mi piquete de una persona con cartel de cartón en plaza de pueblo rural",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "nuestra acción de dos personas con pancarta fuera de estacionamiento de estadio shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "nuestra acción de dos personas con pancarta fuera de estacionamiento de estadio",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "protesta silenciosa individual con cartel escrito a mano en acera de iglesia comunitaria reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "protesta silenciosa individual con cartel escrito a mano en acera de iglesia comunitaria",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "grupo pequeño con carteles de mensaje cerca de entrada de festival cultural vídeo vertical",
+      "source_anchor": "vídeo vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "grupo pequeño con carteles de mensaje cerca de entrada de festival cultural",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "mi video local de una persona levantando cartel de papel en galería comercial suburbana video corto",
+      "source_anchor": "video corto",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "mi video local de una persona levantando cartel de papel en galería comercial suburbana",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-06",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "dos residentes mostrando carteles de lema frente a ayuntamiento de pueblo vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "dos residentes mostrando carteles de lema frente a ayuntamiento de pueblo",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-07",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "manifestación de una persona con cartel informativo en puerta de centro deportivo shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestación de una persona con cartel informativo en puerta de centro deportivo",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-es-08",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "nuestra pequeña acción comunitaria con pancarta junto a terminal regional de autobuses vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "nuestra pequeña acción comunitaria con pancarta junto a terminal regional de autobuses",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "mon piquet d'une personne avec pancarte carton place village rural vidéo téléphone",
+      "source_anchor": "vidéo téléphone",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "mon piquet d'une personne avec pancarte carton place village rural",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "notre action de deux personnes avec banderole devant parking stade shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "notre action de deux personnes avec banderole devant parking stade",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "protestation silencieuse solo avec pancarte manuscrite trottoir église communauté reel",
+      "source_anchor": "reel",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "protestation silencieuse solo avec pancarte manuscrite trottoir église communauté",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "petit groupe avec panneaux message près entrée festival culturel vidéo verticale",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "petit groupe avec panneaux message près entrée festival culturel",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "ma vidéo locale d'une personne levant pancarte papier galerie commerciale banlieue vidéo courte",
+      "source_anchor": "vidéo courte",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "ma vidéo locale d'une personne levant pancarte papier galerie commerciale banlieue",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-06",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "deux résidents montrant pancartes slogan devant mairie village vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "deux résidents montrant pancartes slogan devant mairie village",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-07",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "manifestation d'une personne avec pancarte information portail centre sportif shorts",
+      "source_anchor": "shorts",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "manifestation d'une personne avec pancarte information portail centre sportif",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    },
+    {
+      "query_id": "sav135-venue-fr-08",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "notre petite action communauté avec banderole près terminal bus régional vidéo téléphone",
+      "source_anchor": "vidéo téléphone",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "notre petite action communauté avec banderole près terminal bus régional",
+      "rationale_zh": "从冻结的1至5名直接参与者持牌/横幅定义派生与v1.34明显不同的地域、现场类型和移动拍摄语境；每条含来源锚点与动作场景词，保持来源门、原始0.440最大相似度门、uploader cap及全部硬排除。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.34.0"
+}

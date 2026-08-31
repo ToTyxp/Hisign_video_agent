@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "query_pack_version": "sign_action_v1.qp.v1.12.0",
+  "campaign_id": "sign_action_v1",
+  "concept_pack_version": "sign_action_zh_concepts_v1.0.0",
+  "concept_source_path": "surveillance-video-agent/query-packs/sign-action-concepts.v1.0.0.freeze.json",
+  "source_sha256": "696ff69f25e03c2cb761d217e2eddfb4d1e3221b89487b22b81aff9e5aba4731",
+  "frozen_semantics_zh": {
+    "campaign_definition": "固定监控或手机拍摄的真实场景中，1至5名直接参与者手持、展示、高举牌子或展开横幅；背景路人不计入人数。",
+    "subtypes": [
+      {
+        "subtype": "举牌/横幅",
+        "target_definition": "直接举牌或展示横幅者为1至5人；排除大型游行、密集群众集会以及主要画面不是小规模举牌者的视频。",
+        "core_concepts": [
+          "单人举牌",
+          "独自举牌抗议",
+          "个人手持标语牌",
+          "个人展示牌子",
+          "两人举牌",
+          "小组举牌",
+          "少数人拉横幅",
+          "街边举牌",
+          "路边举牌",
+          "门口举牌",
+          "店外举牌",
+          "小规模纠察"
+        ],
+        "forbidden_scale_concepts": [
+          "大型游行",
+          "大规模抗议",
+          "密集群众集会",
+          "数百人集会",
+          "数千人游行"
+        ]
+      }
+    ]
+  },
+  "network_config": "default",
+  "derived_languages": [
+    "en",
+    "es",
+    "fr"
+  ],
+  "created_at": "2026-08-28T00:00:00Z",
+  "created_by": "ai",
+  "frozen_at": "2026-08-28",
+  "frozen_by": "derived_from_frozen_user_concepts",
+  "content_sha256": "a458ecdd65cc5b207894c9e129e1365cf03fc4d6c8eed06b6b6c0170208a181b",
+  "content_sha256_scope": "canonical jq -cS .queries",
+  "content_sha256_status": "verified_frozen",
+  "revision_reason": "下载目标尚有178条缺口；仅扩展冻结小规模举牌的未覆盖地点，不改变门槛。",
+  "queries": [
+    {
+      "query_id": "sav112-sign-banner-en-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "one person holding complaint sign outside courthouse phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "one person holding complaint sign outside courthouse",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-en-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "two workers with picket signs at transit depot vertical video",
+      "source_anchor": "vertical video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "two workers with picket signs at transit depot",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-en-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "small group with protest banner library entrance short video",
+      "source_anchor": "short video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "small group with protest banner library entrance",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-en-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "tenant holding housing protest sign outside office mobile video",
+      "source_anchor": "mobile video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "tenant holding housing protest sign outside office",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-en-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "en",
+      "query": "two people displaying petition banner community center phone video",
+      "source_anchor": "phone video",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "two people displaying petition banner community center",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-es-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "una persona con cartel de queja frente al juzgado vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "una persona con cartel de queja frente al juzgado",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-es-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "dos trabajadores con carteles de piquete en depósito de transporte vídeo vertical",
+      "source_anchor": "vídeo vertical",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "dos trabajadores con carteles de piquete en depósito de transporte",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-es-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "grupo pequeño con pancarta de protesta en entrada de biblioteca video corto",
+      "source_anchor": "video corto",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "grupo pequeño con pancarta de protesta en entrada de biblioteca",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-es-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "inquilino con cartel de protesta por vivienda fuera de oficina vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "inquilino con cartel de protesta por vivienda fuera de oficina",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-es-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "es",
+      "query": "dos personas mostrando pancarta de petición en centro comunitario vídeo móvil",
+      "source_anchor": "vídeo móvil",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "dos personas mostrando pancarta de petición en centro comunitario",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-fr-01",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "une personne avec pancarte de plainte devant tribunal vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "une personne avec pancarte de plainte devant tribunal",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-fr-02",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "deux travailleurs avec pancartes de piquet au dépôt de transport vidéo verticale",
+      "source_anchor": "vidéo verticale",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "deux travailleurs avec pancartes de piquet au dépôt de transport",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-fr-03",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "petit groupe avec banderole de protestation entrée bibliothèque vidéo courte",
+      "source_anchor": "vidéo courte",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "petit groupe avec banderole de protestation entrée bibliothèque",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-fr-04",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "locataire avec pancarte protestation logement devant bureau vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "locataire avec pancarte protestation logement devant bureau",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    },
+    {
+      "query_id": "sav112-sign-banner-fr-05",
+      "campaign_id": "sign_action_v1",
+      "subtype": "举牌/横幅",
+      "lang": "fr",
+      "query": "deux personnes montrant banderole de pétition centre communautaire vidéo mobile",
+      "source_anchor": "vidéo mobile",
+      "source_pool": "mobile_adjacent",
+      "action_or_scene_term": "deux personnes montrant banderole de pétition centre communautaire",
+      "rationale_zh": "从冻结的1至5人直接举牌定义派生法院、交通枢纽、图书馆、办公室和社区中心长尾场景；不改变来源、0.440原始语义门或大规模硬排除。"
+    }
+  ],
+  "revision_from": "sign_action_v1.qp.v1.11.0"
+}
