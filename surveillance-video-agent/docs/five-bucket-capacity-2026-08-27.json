@@ -25,6 +25,7 @@
         "downloads_at_wilson_lower": 109,
         "interpretation": "代理证据不可用于自动放宽门槛；未映射桶必须先有新冻结定义和首批人工校准。"
       },
+      "download_scope": "included_or_pending_definition",
       "evidence": {
         "campaign_id": "fight_confounder_v1",
         "subtype": "reviewer-corrected 打架/打架斗殴",
@@ -55,6 +56,7 @@
         "downloads_at_wilson_lower": 203,
         "interpretation": "以人工 task_usable 为成功，预算是需要进入人工标注的技术成功下载数。"
       },
+      "download_scope": "included_or_pending_definition",
       "evidence": {
         "campaign_id": "sign_action_v1",
         "subtype": "举牌/横幅（冻结为 1–5 名直接参与者）",
@@ -74,17 +76,18 @@
         "split_assignable_in_sqlite": false
       },
       "mapping": {
-        "status": "unmapped",
-        "mapping": "无现有 campaign/subtype",
-        "boundary": "sign_action_v1 明确硬排除大规模抗议；demand_action_v1 不记录人数尺度且处于 hold。"
+        "status": "excluded_by_user",
+        "mapping": "不纳入当前下载范围",
+        "boundary": "用户已明确排除；不得搜索、probe、激活或下载。"
       },
       "candidate_budget": {
         "observed_human_usable_rate": null,
         "wilson_95_lower": null,
         "downloads_at_point_estimate": null,
         "downloads_at_wilson_lower": null,
-        "interpretation": "零直接样本：先完成新定义下的首批人工校准，不能由其他桶借用命中率。"
+        "interpretation": "用户已排除，不建立统计容量或下载队列。"
       },
+      "download_scope": "excluded",
       "evidence": null
     },
     {
@@ -109,6 +112,7 @@
         "downloads_at_wilson_lower": 129,
         "interpretation": "以人工 task_usable 为成功，预算是需要进入人工标注的技术成功下载数。"
       },
+      "download_scope": "included_or_pending_definition",
       "evidence": {
         "campaign_id": "fight_confounder_v1",
         "subtype": "四个非攻击性对照 subtype",
@@ -128,17 +132,18 @@
         "split_assignable_in_sqlite": false
       },
       "mapping": {
-        "status": "unmapped",
-        "mapping": "无现有 campaign/subtype",
-        "boundary": "当前三个冻结 query pack 都没有“类抗议非抗议对照”的定义或人工标签。"
+        "status": "excluded_by_user",
+        "mapping": "不纳入当前下载范围",
+        "boundary": "用户已明确排除；不得搜索、probe、激活或下载。"
       },
       "candidate_budget": {
         "observed_human_usable_rate": null,
         "wilson_95_lower": null,
         "downloads_at_point_estimate": null,
         "downloads_at_wilson_lower": null,
-        "interpretation": "零直接样本：先完成新定义下的首批人工校准，不能由其他桶借用命中率。"
+        "interpretation": "用户已排除，不建立统计容量或下载队列。"
       },
+      "download_scope": "excluded",
       "evidence": null
     }
   ],
@@ -150,13 +155,13 @@
     },
     {
       "campaign_id": "fight_confounder_v1",
-      "assigned": 15,
-      "downloaded": 12
+      "assigned": 40,
+      "downloaded": 37
     },
     {
       "campaign_id": "sign_action_v1",
-      "assigned": 91,
-      "downloaded": 91
+      "assigned": 100,
+      "downloaded": 100
     }
   ],
   "sign_action_operational_metrics": {
@@ -167,16 +172,16 @@
     "cumulative_source_determinate": 62,
     "remaining_human_usable_gap": 36,
     "candidate_budget": 180,
-    "candidate_budget_consumed": 91,
-    "candidate_budget_remaining": 89,
-    "required_future_human_usable_rate": 0.4044943820224719,
+    "candidate_budget_consumed": 100,
+    "candidate_budget_remaining": 80,
+    "required_future_human_usable_rate": 0.45,
     "latest_batch": {
-      "batch_id": "0875d625-72be-4de5-af01-b8fcd95ed805",
-      "run_id": "five-bucket-small-positive-batch2-20260827",
+      "batch_id": "209a4054-533c-4572-b934-50296085ef6a",
+      "run_id": "heartbeat-sign-small-batch4-20260827",
       "status": "completed",
-      "released_count": 20,
-      "eligible_count": 16,
-      "technical_success_count": 16,
+      "released_count": 12,
+      "eligible_count": 0,
+      "technical_success_count": 0,
       "human_labels": {
         "label_count": 0,
         "task_usable_count": null,
@@ -187,10 +192,10 @@
     },
     "manifest": {
       "path": "/Users/yangxp/Desktop/Work_hisign/ytb异常视频下载/Candidate_Downloads/sign_action_v1/manifest.jsonl",
-      "record_count": 91,
-      "complete_record_count": 91,
-      "unique_candidate_keys": 91,
-      "unique_sha256": 91
+      "record_count": 100,
+      "complete_record_count": 100,
+      "unique_candidate_keys": 100,
+      "unique_sha256": 100
     },
     "sha256_duplicate_edges": 0
   }
